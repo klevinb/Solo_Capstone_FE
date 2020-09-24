@@ -1,0 +1,36 @@
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.App {
+  background-image: url('/assets/background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+  overflow: auto;
+}
+
+a {
+  color: #3f51b5;
+}
+
+/* mobile view */
+
+.login {
+  padding-top: 30vh;
+  padding-bottom: 50px;
+}
+.signup {
+  padding-top: 30vh;
+  padding-bottom: 50px;
+}
