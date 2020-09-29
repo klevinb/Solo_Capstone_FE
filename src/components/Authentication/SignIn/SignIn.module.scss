@@ -1,0 +1,40 @@
+.Login {
+  background-color: white;
+  padding: 50px;
+  border-radius: 25px;
+  width: 500px;
+  form {
+    display: grid;
+  }
+  button {
+    justify-self: end;
+    background-color: transparent;
+    color: gray;
+    border: 1px solid gray;
+  }
+  button:hover,
+  button:active,
+  button:focus {
+    background-color: gray !important;
+    color: whitesmoke;
+    border: 1px solid whitesmoke !important;
+  }
+  a {
+    color: #3f51b5;
+  }
+}
+@media (max-width: 575px) {
+  .Login {
+    margin-top: 25vh;
+    width: 90%;
+    background-color: yellow;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 900px) {
+  .Login {
+    margin-top: 25vh;
+    width: 90%;
+    background-color: red;
+  }
+}

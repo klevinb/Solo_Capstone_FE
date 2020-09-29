@@ -14,23 +14,8 @@ body {
   background-position: center;
   background-size: cover;
   display: flex;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: auto;
-}
-
-a {
-  color: #3f51b5;
-}
-
-/* mobile view */
-
-.login {
-  padding-top: 30vh;
-  padding-bottom: 50px;
-}
-.signup {
-  padding-top: 30vh;
-  padding-bottom: 50px;
 }
