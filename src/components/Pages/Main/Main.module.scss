@@ -1,0 +1,81 @@
+.Home {
+  height: 100%;
+  width: 100%;
+  background-image: url('/assets/mainpage.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  padding: 150px;
+  h1 {
+    color: whitesmoke;
+    font-size: 100px;
+    font-weight: bolder;
+    span {
+      font-weight: 50 !important;
+    }
+  }
+  button {
+    background-color: rgb(204, 19, 204);
+    border: 0;
+    font-size: 30px;
+    border-radius: 25px;
+    padding: 10px 30px 10px 30px;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    box-shadow: 0px 0px 3px 3px purple;
+  }
+  button:hover {
+    background-color: purple;
+    transition: 0.4s ease-in-out;
+  }
+}
+
+.Events {
+  height: 100%;
+  width: 100%;
+  background-image: url('/assets/events.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  padding: 150px;
+}
+
+@media (max-width: 575px) {
+  .Home {
+    background-position-x: center;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+
+    h1 {
+      color: whitesmoke;
+      font-size: 50px;
+      font-weight: bolder;
+      span {
+        font-weight: 50 !important;
+      }
+    }
+    button {
+      background-color: purple;
+      border: 0;
+      font-size: 15px;
+      border-radius: 25px;
+      padding: 10px 30px 10px 30px;
+      a {
+        color: white;
+        text-decoration: none;
+      }
+      color: white;
+    }
+  }
+  .Events {
+    background-position-x: center;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+  }
+}

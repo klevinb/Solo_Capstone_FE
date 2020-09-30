@@ -16,41 +16,43 @@ export default function SignUp() {
   };
 
   return (
-    <div className={styles.SignUp}>
-      <h3>Register</h3>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type='text'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder='Enter email'
-          />
-        </Form.Group>
+    <div className={styles.Container}>
+      <div className={styles.SignUp}>
+        <h3>Register</h3>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId='name'>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type='text'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder='Enter email'
+            />
+          </Form.Group>
 
-        <Form.Group controlId='formBasicPassword'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            onChange={checkInputs}
-            placeholder='Password'
-          />
-        </Form.Group>
-        <Form.Group controlId='formBasicCheckbox'>
-          <Form.Check
-            type='checkbox'
-            onChange={checkInputs}
-            label='Check me out'
-          />
-        </Form.Group>
-        <Button variant='primary' type='submit'>
-          Register
-        </Button>
-      </Form>
-      <span>
-        Already have an account? <Link to='/'>Login</Link>
-      </span>
+          <Form.Group controlId='formBasicPassword'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='password'
+              onChange={checkInputs}
+              placeholder='Password'
+            />
+          </Form.Group>
+          <Form.Group controlId='formBasicCheckbox'>
+            <Form.Check
+              type='checkbox'
+              onChange={checkInputs}
+              label='Check me out'
+            />
+          </Form.Group>
+          <Button variant='primary' type='submit'>
+            Register
+          </Button>
+        </Form>
+        <span>
+          Already have an account? <Link to='/login'>Login</Link>
+        </span>
+      </div>
     </div>
   );
 }

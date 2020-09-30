@@ -9,13 +9,6 @@ body {
 }
 
 .App {
-  background-image: url('/assets/background.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   overflow: auto;
 }
