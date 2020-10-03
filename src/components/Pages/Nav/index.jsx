@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Nav.module.scss';
-import { Image } from 'react-bootstrap';
+import { Image, Dropdown } from 'react-bootstrap';
 import MenuIcon from '@material-ui/icons/Menu';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutThunk } from '../../../Utilities';
 
-const Nav = () => {
-  const [show, setShow] = useState(false);
+const mapStateToProps = (state) => state;
+const mapDispatchToProps = (dispatch, props) => ({
+  logout: () => dispatch(logoutThunk()),
+});
+
+const Nav = (props) => {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {}, [props.user]);
+
   return (
     <>
       <div className={styles.Nav}>
@@ -19,22 +30,82 @@ const Nav = () => {
         />
         <div
           className={
-            show ? `${(styles.NavLinks, styles.Show)}` : `${styles.NavLinks}`
+            show ? `${styles.NavLinks}` : `${(styles.NavLinks, styles.Show)}`
           }
         >
-          <ol onClick={() => setShow(!show)}>
-            <li>
-              <a href='#home'>Home</a>
-            </li>
-            <li>
-              <a href='#events'>Events</a>
-            </li>
-            <li>
-              <a href='#events'>Contacts</a>
-            </li>
-            <li>
-              <Link to='/login'>Login</Link>
-            </li>
+          <ol>
+            {props.location.pathname !== '/login' &&
+              props.location.pathname !== '/register' && (
+                <>
+                  {props.loggedIn ? (
+                    <li onClick={() => props.history.push('/posts')}>
+                      <a href='#home'>Posts</a>
+                    </li>
+                  ) : (
+                    <li
+                      onClick={() => {
+                        setShow(!show);
+                        props.history.push('/#home');
+                      }}
+                    >
+                      <a href='#home'>Home</a>
+                    </li>
+                  )}
+                  <li
+                    onClick={() => {
+                      setShow(!show);
+                      props.history.push('/#events');
+                    }}
+                  >
+                    <a href='#events'>Events</a>
+                  </li>
+                  <li
+                    onClick={() => {
+                      setShow(!show);
+                      props.history.push('/#contacts');
+                    }}
+                  >
+                    <a href='#contacts'>Contacts</a>
+                  </li>
+                </>
+              )}
+            {props.loggedIn ? (
+              <li className={styles.UserInfo}>
+                <Dropdown>
+                  <Dropdown.Toggle variant='transparent' id='dropdown-basic'>
+                    <Image
+                      src={
+                        props.user && props.user.image
+                          ? props.user.image
+                          : 'https://via.placeholder.com/300x200'
+                      }
+                    />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => props.history.push('/#home')}>
+                      My Profile
+                    </Dropdown.Item>
+
+                    <Dropdown.Item
+                      className={styles.Logout}
+                      onClick={() => {
+                        localStorage.removeItem('loggedIn');
+                        props.logout();
+                        props.history.push('/#contacts');
+                        setShow(!show);
+                      }}
+                    >
+                      Log out
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </li>
+            ) : (
+              <li>
+                <Link to='/login'>Login</Link>
+              </li>
+            )}
           </ol>
         </div>
       </div>
@@ -42,4 +113,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Nav));

@@ -17,6 +17,7 @@ export default function SignUp() {
 
   return (
     <div className={styles.Container}>
+      <div className={styles.BG}></div>
       <div className={styles.SignUp}>
         <h3>Register</h3>
         <Form onSubmit={handleSubmit}>

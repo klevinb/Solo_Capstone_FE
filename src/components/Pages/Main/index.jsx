@@ -1,27 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Main.module.scss';
-import Tada from 'react-reveal/Tada';
-import { Events } from '../../../components';
+import Events from '../Events';
+import Contacts from '../Contacts';
+import Dashboard from '../Dashboard';
+import { connect } from 'react-redux';
 
-export default () => {
+const mapStateToProps = (state) => state;
+
+const Main = (props) => {
   return (
     <>
       <div className={styles.Home} id='home'>
-        <Tada>
-          <div>
-            <h1>
-              <span>SUPERMIX</span>
-            </h1>
-            <h1>ELECTRO HOUSE</h1>
-            <button>
-              <a href='#events'>GET TICKETS</a>
-            </button>
-          </div>
-        </Tada>
+        <Dashboard history={props.history} />
       </div>
-      <div className={styles.Events} id='events'>
+      <div className={`${styles.Container} ${styles.Events}`} id='events'>
         <Events />
+      </div>
+      <div className={`${styles.Container} ${styles.Contacts}`} id='contacts'>
+        <Contacts />
       </div>
     </>
   );
 };
+
+export default connect(mapStateToProps, null)(Main);

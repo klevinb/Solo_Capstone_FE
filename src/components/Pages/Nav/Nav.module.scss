@@ -6,7 +6,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 99;
+  // background-color: rgb(13, 21, 39);
+  .UserInfo {
+    img {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+    button {
+      background-color: transparent;
+      color: whitesmoke;
+      border: 0;
+    }
 
+    a {
+      color: black !important;
+    }
+    .Logout {
+      color: red !important;
+    }
+    a:hover {
+      color: rgb(204, 19, 204) !important;
+    }
+  }
   img {
     width: 20%;
   }
@@ -53,11 +77,12 @@
       font-size: 45px;
     }
     .NavLinks {
-      display: none;
+      display: none !important;
       ol {
         display: none;
       }
     }
+
     .Show {
       position: absolute;
       top: 100%;
@@ -115,6 +140,34 @@
             color: whitesmoke;
           }
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 901px) {
+  .Show {
+    a {
+      text-decoration: none !important;
+      color: whitesmoke;
+      font-weight: bolder;
+      padding: 10px 20px 10px 20px;
+    }
+
+    a:hover {
+      color: rgb(204, 19, 204);
+      box-shadow: 0px 0px 3px 3px purple;
+    }
+
+    ol {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      cursor: pointer;
+      li {
+        padding-right: 20px;
+        font-size: 1.2rem;
       }
     }
   }

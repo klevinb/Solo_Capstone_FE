@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Card, Row, Col } from 'react-bootstrap';
 import styles from './Events.module.scss';
+import Pulse from 'react-reveal/Pulse';
 
 const mapStateToProps = (state) => state;
 const url = process.env.REACT_APP_BE_ENDPOINT;
@@ -28,69 +29,61 @@ const Events = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (props.loggedIn) {
-      const fetchEvents = async () => {
-        const resp = await fetch(url + '/api/events', {
-          credentials: 'include',
-        });
-        console.log(resp);
-        if (resp.ok) {
-          const data = await resp.json();
-          console.log(data);
-          setEvents(data);
-        }
-      };
-      fetchEvents();
-    } else {
-      const fetchEvents = async () => {
-        const resp = await fetch(url + '/api/events/notUser');
-        console.log(resp);
-        if (resp.ok) {
-          const data = await resp.json();
-          console.log(data);
-          setEvents(data);
-        }
-      };
-      fetchEvents();
+  const fetchEvents = async () => {
+    const resp = await fetch(
+      url + `/api/events${props.loggedIn === true ? '' : '/notUser'}`,
+      {
+        credentials: 'include',
+      }
+    );
+
+    if (resp.ok) {
+      const data = await resp.json();
+
+      setEvents(data);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, [props.user]);
 
   return (
     <>
-      <div className={styles.Container}>
+      <div className={styles.Events}>
         <Row className='row-cols-2'>
-          {console.log(props)}
           {events.map((event, key) => (
             <Col key={key} sm={6} lg={4}>
-              <Card className={styles.Card}>
-                <Card.Img
-                  variant='top'
-                  src={
-                    event.image[0]
-                      ? event.image[0]
-                      : 'https://via.placeholder.com/300x200'
-                  }
-                />
-                <Card.Body className={styles.CardBody}>
-                  <Card.Title>{event.name}</Card.Title>
-                  <Card.Text>{event.description}</Card.Text>
-                  <Card.Text>
-                    <span className={styles.Bold}>Organizer </span>
-                    {event.organizer}
-                  </Card.Text>
-                  {event.performer && (
+              <Pulse>
+                <Card className={styles.Card}>
+                  <Card.Img
+                    variant='top'
+                    src={
+                      event.image[0]
+                        ? event.image[0]
+                        : 'https://via.placeholder.com/300x200'
+                    }
+                  />
+                  <Card.Body className={styles.CardBody}>
+                    <Card.Title>{event.name}</Card.Title>
+                    <Card.Text>{event.description}</Card.Text>
                     <Card.Text>
-                      <span className={styles.Bold}>Performer </span>
-                      {event.performer}
+                      <span className={styles.Bold}>Organizer </span>
+                      {event.organizer}
                     </Card.Text>
-                  )}
+                    {event.performer && (
+                      <Card.Text>
+                        <span className={styles.Bold}>Performer </span>
+                        {event.performer}
+                      </Card.Text>
+                    )}
 
-                  <button
-                    onClick={() => buyEvent(event._id)}
-                  >{`Buy Ticket $${event.price}`}</button>
-                </Card.Body>
-              </Card>
+                    <button
+                      onClick={() => buyEvent(event._id)}
+                    >{`Buy Ticket $${event.price}`}</button>
+                  </Card.Body>
+                </Card>
+              </Pulse>
             </Col>
           ))}
         </Row>

@@ -6,7 +6,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialStore = {
   loggedIn: false,
-  username: null,
+  user: null,
 };
 
 export default function configureStore() {

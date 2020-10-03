@@ -1,0 +1,95 @@
+.Settings {
+  .PopOver {
+    background-color: black;
+  }
+  .Col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .SubmitButton {
+      background-color: whitesmoke;
+      border: 1px solid transparent;
+      color: black;
+      font-size: unset;
+      border-radius: 25px;
+      padding: 15px 15px 15px 15px;
+      box-shadow: unset;
+    }
+    .SubmitButton:hover {
+      background-color: transparent;
+      border: 1px solid whitesmoke;
+      color: white;
+      transition: 0.4s ease-in-out;
+    }
+    .PassButton {
+      background-color: whitesmoke;
+      border: 1px solid transparent;
+      color: black;
+      font-size: unset;
+      border-radius: 0;
+      padding: 15px 15px 15px 15px;
+      box-shadow: unset;
+    }
+    .ErrorMessage {
+      color: red;
+    }
+    .OldPassword:focus + .ErrorMessage {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .Settings {
+    form {
+      font-size: 15px;
+      input {
+        width: 95%;
+      }
+    }
+  }
+  .PassButton {
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    color: black;
+    font-size: unset;
+    border-radius: 0;
+    padding: 0px !important;
+    box-shadow: unset;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 900px) {
+  .PassButton {
+    background-color: whitesmoke;
+    border: 1px solid transparent;
+    color: black;
+    font-size: unset;
+    border-radius: 0;
+    padding: 0px !important;
+    box-shadow: unset;
+  }
+  .Settings {
+    form {
+      font-size: 20px;
+      input {
+        width: 95%;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .PassButton {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1200px) {
+  .PassButton {
+    font-size: 15px;
+    margin-right: 10px;
+    padding: 0px 10px 0px 10px;
+  }
+}

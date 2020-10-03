@@ -1,0 +1,91 @@
+.Dashboard {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  .Row {
+    width: 100%;
+    color: whitesmoke;
+    .Details {
+      .Col {
+        display: flex;
+        justify-content: center;
+        p {
+          font-weight: bold;
+          font-size: 25px;
+        }
+      }
+      img {
+        width: 50%;
+        max-height: 80%;
+        border-radius: 25px;
+      }
+    }
+  }
+  .Menu {
+    .Selected {
+      color: darkviolet;
+      font-weight: bold;
+    }
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    .ListGroup {
+      width: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      background-color: transparent;
+      .ListItem {
+        text-align: center;
+        background-color: transparent;
+        margin: 10px;
+        border: 1px solid transparent;
+        font-weight: bold;
+      }
+      .ListItem:hover {
+        color: darkviolet;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .Dashboard {
+    .Menu {
+      .ListGroup {
+        width: unset;
+        flex-direction: unset;
+        font-size: unset;
+        .ListItem {
+          margin: 0;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 900px) {
+  .Dashboard {
+    .Menu {
+      .ListGroup {
+        width: unset;
+        flex-direction: unset;
+        font-size: unset;
+      }
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .Dashboard {
+    .Menu {
+      .ListGroup {
+        width: unset;
+        flex-direction: unset;
+        font-size: unset;
+      }
+    }
+  }
+}
