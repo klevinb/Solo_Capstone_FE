@@ -39,7 +39,7 @@ const Nav = (props) => {
                 <>
                   {props.loggedIn ? (
                     <li onClick={() => props.history.push('/posts')}>
-                      <a href='#home'>Posts</a>
+                      <a>Posts</a>
                     </li>
                   ) : (
                     <li

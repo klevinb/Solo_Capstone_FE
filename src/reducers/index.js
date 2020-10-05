@@ -15,7 +15,18 @@ export default function (state = [], action) {
         ...state,
         loggedIn: false,
       };
-
+    case 'FOLLOW_USER':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          following: state.user.following.find(
+            (user) => user._id === action.payload
+          )
+            ? state.user.following.filter((user) => user._id !== action.payload)
+            : [...state.user.following, { _id: action.payload }],
+        },
+      };
     default:
       return state;
   }

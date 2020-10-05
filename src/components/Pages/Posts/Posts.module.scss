@@ -1,0 +1,102 @@
+.Posts {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(350deg, #060c14 45%, #0d1527 70%);
+  display: flex;
+  padding: 20vh 0 0 50px;
+  position: relative;
+  overflow-y: auto;
+  .Row {
+    color: whitesmoke;
+    width: 100%;
+    .PostCol {
+      .PostsBlocks {
+        margin-bottom: 50px;
+      }
+    }
+    .NewPostSection {
+      width: 100%;
+      margin-bottom: 0px;
+      display: flex;
+      align-items: center;
+      button {
+        border: 1px solid whitesmoke;
+        background: transparent;
+        color: whitesmoke;
+        margin-left: 10px;
+      }
+      textarea {
+        width: 70%;
+        min-height: 50px;
+        max-height: 100px;
+      }
+      svg {
+        font-size: 35px;
+        margin-left: 10px;
+      }
+    }
+    .Card {
+      background: transparent;
+      border: 0;
+      display: flex !important;
+      flex-direction: column !important;
+      img {
+        width: 70%;
+        justify-self: center;
+      }
+      .CardBody {
+        padding: 20px 0 0 0 !important;
+        width: 100%;
+      }
+      .CardTitle {
+        display: flex;
+        justify-content: space-around;
+      }
+      .PostInfo {
+        display: flex;
+        align-items: center;
+        position: relative;
+        button {
+          margin-left: 10px;
+          padding: 0;
+          border: 0;
+          background-color: transparent;
+          color: whitesmoke;
+          font-size: 15px;
+        }
+        img {
+          width: 80px;
+          border-radius: 50%;
+          margin-right: 20px;
+        }
+        p {
+          margin: 0;
+        }
+        .Dropdown {
+          background: transparent;
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+      .PostText {
+        padding: 10px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .Posts {
+    .Row {
+      padding-top: 8vh;
+    }
+    display: flex;
+    justify-content: center;
+
+    padding: 13px;
+  }
+  .Reklam {
+    display: none;
+  }
+}

@@ -25,11 +25,11 @@ export const refreshTokens = (history) => {
       );
 
       if (resp.status === 200) {
-        window.location.replace('https://www.w3schools.com');
+        window.location.replace('http://localhost:3000/');
       }
       if (resp.status === 401) {
         localStorage.removeItem('loggedIn');
-        // history.push('/login');
+        history.push('/login');
       }
     };
     refreshAsync();
