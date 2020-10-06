@@ -38,8 +38,13 @@ const Nav = (props) => {
               props.location.pathname !== '/register' && (
                 <>
                   {props.loggedIn ? (
-                    <li onClick={() => props.history.push('/posts')}>
-                      <a>Posts</a>
+                    <li
+                      onClick={() => {
+                        setShow(!show);
+                        props.history.push('/posts');
+                      }}
+                    >
+                      <a href='#'>Posts</a>
                     </li>
                   ) : (
                     <li

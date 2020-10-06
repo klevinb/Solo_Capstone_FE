@@ -45,6 +45,11 @@
 }
 
 @media (max-width: 575px) {
+  .Container {
+    height: auto;
+    padding: 50px 0;
+  }
+
   .SignUp {
     width: 100%;
     margin: 20px;

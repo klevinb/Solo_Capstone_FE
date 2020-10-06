@@ -7,7 +7,6 @@ import Settings from './Settings';
 import Events from './Events';
 import Messages from './Messages';
 import { refreshTokens } from '../../../Utilities';
-import io from 'socket.io-client';
 
 const url = process.env.REACT_APP_BE_ENDPOINT;
 const mapStateToProps = (state) => state;
@@ -18,30 +17,40 @@ const mapDispatchToProps = (dispatch, props) => ({
       type: 'SET_USER',
       payload: user,
     }),
-  setLoggedIn: () =>
+  saveMsg: (msgs) =>
     dispatch({
-      type: 'PUT_LOGIN_ACTIVE',
+      type: 'SET_MESSAGES',
+      payload: msgs,
     }),
   refreshTokens: (history) => dispatch(refreshTokens(history)),
 });
 
 const Dashboard = (props) => {
   const [show, setShow] = useState(false);
-  const [selected, setSelected] = useState('Settings');
-  let socket = null;
+  const [selected, setSelected] = useState('Events');
+
   const fetchUser = async () => {
     const resp = await fetch(url + '/api/users/me', {
       credentials: 'include',
     });
 
+    const messages = await fetch(url + '/api/messages', {
+      credentials: 'include',
+    });
+
+    if (messages.ok) {
+      const data = await messages.json();
+      props.saveMsg(data);
+    } else if (messages.status === 401) {
+      props.refreshTokens(props.history);
+    }
+
     if (resp.ok) {
       const data = await resp.json();
       props.setUser(data);
-      props.setLoggedIn();
       localStorage.setItem('loggedIn', true);
     }
     if (resp.status === 401) {
-      console.log('401', props.history);
       props.refreshTokens(props.history);
     }
   };
@@ -51,21 +60,6 @@ const Dashboard = (props) => {
       fetchUser();
     }
     setShow(!props.loggedIn);
-    const connectionOpt = {
-      transports: ['websocket'],
-    };
-    socket = io(url, connectionOpt);
-    socket.on('online', (data) => {
-      console.log(data);
-    });
-    socket.on('message', (msg) => {
-      console.log(msg);
-    });
-    if (props.user) {
-      socket.emit('setUsername', {
-        username: props.user.username,
-      });
-    }
   }, [props.loggedIn]);
 
   return (

@@ -3,12 +3,13 @@ export default function (state = [], action) {
     case 'SET_USER':
       return {
         ...state,
+        loggedIn: true,
         user: action.payload,
       };
-    case 'PUT_LOGIN_ACTIVE':
+    case 'SET_ACTIVE_USERS':
       return {
         ...state,
-        loggedIn: true,
+        activeUsers: action.payload,
       };
     case 'LOGOUT':
       return {
@@ -21,11 +22,18 @@ export default function (state = [], action) {
         user: {
           ...state.user,
           following: state.user.following.find(
-            (user) => user._id === action.payload
+            (user) => user._id === action.payload._id
           )
-            ? state.user.following.filter((user) => user._id !== action.payload)
-            : [...state.user.following, { _id: action.payload }],
+            ? state.user.following.filter(
+                (user) => user._id !== action.payload._id
+              )
+            : [...state.user.following, { ...action.payload }],
         },
+      };
+    case 'SET_MESSAGES':
+      return {
+        ...state,
+        messages: action.payload,
       };
     default:
       return state;

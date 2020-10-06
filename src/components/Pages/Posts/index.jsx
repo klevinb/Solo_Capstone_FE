@@ -10,10 +10,10 @@ const url = process.env.REACT_APP_BE_ENDPOINT;
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch, props) => ({
-  follow: (id) =>
+  follow: (user) =>
     dispatch({
       type: 'FOLLOW_USER',
-      payload: id,
+      payload: user,
     }),
   refreshTokens: (history) => dispatch(refreshTokens(history)),
 });
@@ -23,8 +23,8 @@ const Posts = (props) => {
   const [text, setText] = useState('');
   const [image, setImage] = useState(null);
 
-  const followUser = async (id) => {
-    const resp = await fetch(url + '/api/users/follow/' + id, {
+  const followUser = async (user) => {
+    const resp = await fetch(url + '/api/users/follow/' + user._id, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -33,7 +33,7 @@ const Posts = (props) => {
     });
     if (resp.ok) {
       const answer = await resp.json();
-      props.follow(id);
+      props.follow({ _id: user._id, name: user.name, surname: user.surname });
     } else if (resp.status === 401) {
       props.refreshTokens();
     }
@@ -45,8 +45,9 @@ const Posts = (props) => {
     });
 
     if (resp.ok) {
+      console.log('HERE');
       const posts = await resp.json();
-      setPosts(posts);
+      setPosts(posts.reverse());
     } else if (resp.status === 401) {
       props.refreshTokens();
     }
@@ -64,21 +65,26 @@ const Posts = (props) => {
         'Content-Type': 'application/json',
       }),
     });
-    console.log(resp);
-    if (resp.ok) {
-      const id = await resp.json();
 
-      const resp2 = await fetch(url + '/api/posts/me/' + id, {
-        method: 'POST',
-        body: photo,
-        credentials: 'include',
-      });
-      if (resp2.ok) {
+    if (resp.ok) {
+      if (image === null) {
         fetchPosts();
         setText('');
         setImage(null);
-      } else if (resp2.staus === 401) {
-        props.refreshTokens();
+      } else {
+        const id = await resp.json();
+        const resp2 = await fetch(url + '/api/posts/me/' + id, {
+          method: 'POST',
+          body: photo,
+          credentials: 'include',
+        });
+        if (resp2.ok) {
+          fetchPosts();
+          setText('');
+          setImage(null);
+        } else if (resp2.staus === 401) {
+          props.refreshTokens();
+        }
       }
     } else if (resp.staus === 401) {
       props.refreshTokens();
@@ -90,6 +96,18 @@ const Posts = (props) => {
     setImage(post);
   };
 
+  const deletePost = async (id) => {
+    const resp = await fetch(url + '/api/posts/' + id, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+    if (resp.ok) {
+      fetchPosts();
+    } else if (resp.status === 401) {
+      props.refreshTokens();
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem('loggedIn')) {
       fetchPosts();
@@ -97,7 +115,7 @@ const Posts = (props) => {
     if (!props.loggedIn) {
       props.history.push('/');
     }
-  }, [props.user]);
+  }, [props.user, posts]);
 
   return (
     <div className={styles.Posts}>
@@ -139,7 +157,7 @@ const Posts = (props) => {
                       </p>
 
                       {props.user && post.user._id !== props.user._id && (
-                        <button onClick={() => followUser(post.user._id)}>
+                        <button onClick={() => followUser(post.user)}>
                           {props.user &&
                           props.user.following.find(
                             (user) => user._id === post.user._id
@@ -157,18 +175,21 @@ const Posts = (props) => {
                         </button>
                       )}
                     </Card.Title>
-                    <Dropdown className={styles.Dropdown}>
-                      <Dropdown.Toggle
-                        variant='success'
-                        id='dropdown-basic'
-                      ></Dropdown.Toggle>
+                    {props.user && post.user._id === props.user._id && (
+                      <Dropdown className={styles.Dropdown}>
+                        <Dropdown.Toggle
+                          variant='success'
+                          id='dropdown-basic'
+                        ></Dropdown.Toggle>
 
-                      <Dropdown.Menu>
-                        <Dropdown.Item href='#/action-1'>Edit</Dropdown.Item>
-
-                        <Dropdown.Item href='#/action-3'>Delete</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                        <Dropdown.Menu>
+                          <Dropdown.Item href='#/action-1'>Edit</Dropdown.Item>
+                          <Dropdown.Item onClick={() => deletePost(post._id)}>
+                            Delete
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    )}
                   </div>
                   <Card.Text className={styles.PostText}>{post.text}</Card.Text>
                 </Card.Body>

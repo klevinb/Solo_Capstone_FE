@@ -6,13 +6,6 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => state;
 
-const mapDispatchToProps = (dispatch, props) => ({
-  setLoggedIn: () =>
-    dispatch({
-      type: 'PUT_LOGIN_ACTIVE',
-    }),
-});
-
 const url = process.env.REACT_APP_BE_ENDPOINT;
 
 function Login(props) {
@@ -31,7 +24,6 @@ function Login(props) {
       }),
     });
     if (resp.ok) {
-      props.setLoggedIn();
       localStorage.setItem('loggedIn', true);
       props.history.push('/');
     } else {
@@ -90,4 +82,4 @@ function Login(props) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);

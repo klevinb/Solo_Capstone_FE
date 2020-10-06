@@ -3,6 +3,7 @@ import styles from './Main.module.scss';
 import Events from '../Events';
 import Contacts from '../Contacts';
 import Dashboard from '../Dashboard';
+
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => state;

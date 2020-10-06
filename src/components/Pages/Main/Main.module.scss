@@ -70,7 +70,7 @@
       }
     }
     button {
-      background-color: purple;
+      background-color: purple !important;
       border: 0;
       font-size: 15px;
       border-radius: 25px;
@@ -87,7 +87,7 @@
 @media screen and (min-width: 576px) and (max-width: 1200px) {
   .Home {
     padding: 150px;
-    height: auto;
+    height: 100%;
   }
 }
 // @media (max-width: 1201px) {

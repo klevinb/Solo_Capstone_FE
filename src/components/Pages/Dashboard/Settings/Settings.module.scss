@@ -1,4 +1,5 @@
 .Settings {
+  height: 500px;
   .PopOver {
     background-color: black;
   }
@@ -7,7 +8,7 @@
     justify-content: space-between;
     align-items: center;
     .SubmitButton {
-      background-color: whitesmoke;
+      background-color: whitesmoke !important;
       border: 1px solid transparent;
       color: black;
       font-size: unset;
@@ -18,11 +19,11 @@
     .SubmitButton:hover {
       background-color: transparent;
       border: 1px solid whitesmoke;
-      color: white;
+      color: black;
       transition: 0.4s ease-in-out;
     }
     .PassButton {
-      background-color: whitesmoke;
+      background-color: whitesmoke !important;
       border: 1px solid transparent;
       color: black;
       font-size: unset;
@@ -49,7 +50,6 @@
     }
   }
   .PassButton {
-    background-color: whitesmoke;
     border: 1px solid transparent;
     color: black;
     font-size: unset;
@@ -61,7 +61,6 @@
 
 @media screen and (min-width: 576px) and (max-width: 900px) {
   .PassButton {
-    background-color: whitesmoke;
     border: 1px solid transparent;
     color: black;
     font-size: unset;
