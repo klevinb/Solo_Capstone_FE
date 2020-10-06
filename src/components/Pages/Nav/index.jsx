@@ -21,7 +21,7 @@ const Nav = (props) => {
     <>
       <div className={styles.Nav}>
         <Link to='/'>
-          <Image src='assets/YOLO.png' />
+          <Image src='%PUBLIC_URL%/assets/YOLO.png' />
         </Link>
 
         <MenuIcon
