@@ -55,7 +55,7 @@
     padding: 50px 20px 0px 20px;
   }
   .Home {
-    height: 100%;
+    height: auto;
     background-position: center;
     display: flex;
     align-items: center;
@@ -87,7 +87,7 @@
 @media screen and (min-width: 576px) and (max-width: 1200px) {
   .Home {
     padding: 150px;
-    height: 100%;
+    height: auto;
   }
 }
 // @media (max-width: 1201px) {

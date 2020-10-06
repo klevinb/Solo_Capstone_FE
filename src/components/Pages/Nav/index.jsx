@@ -21,7 +21,7 @@ const Nav = (props) => {
     <>
       <div className={styles.Nav}>
         <Link to='/'>
-          <Image src='%PUBLIC_URL%/assets/YOLO.png' />
+          <Image src='./assets/YOLO.png' />
         </Link>
 
         <MenuIcon
@@ -88,7 +88,10 @@ const Nav = (props) => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => props.history.push('/#home')}>
+                    <Dropdown.Item
+                      href='#home'
+                      onClick={() => props.history.push('/#home')}
+                    >
                       My Profile
                     </Dropdown.Item>
 

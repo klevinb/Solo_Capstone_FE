@@ -9,6 +9,8 @@
   .Row {
     color: whitesmoke;
     width: 100%;
+    display: flex;
+    justify-content: center;
     .PostCol {
       .PostsBlocks {
         margin-bottom: 50px;

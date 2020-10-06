@@ -28,11 +28,9 @@
   .ActiveUsers::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     border: 0;
-    outline: 1px solid slategrey;
   }
 
   .ChatBox {
-    outline: 1px solid whitesmoke;
     height: 70%;
     .ChatHead {
       background-color: gray;
@@ -42,8 +40,15 @@
       }
     }
     .Messages {
+      border-left: 1px solid whitesmoke;
+      border-right: 1px solid whitesmoke;
+
       height: 80%;
-      outline: 1px solid red;
+      overflow-y: auto;
+      padding: 30px;
+      ul {
+        padding: 0;
+      }
     }
     .Controles {
       background-color: gray;

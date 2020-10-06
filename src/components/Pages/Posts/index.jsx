@@ -67,11 +67,7 @@ const Posts = (props) => {
     });
 
     if (resp.ok) {
-      if (image === null) {
-        fetchPosts();
-        setText('');
-        setImage(null);
-      } else {
+      if (image !== null) {
         const id = await resp.json();
         const resp2 = await fetch(url + '/api/posts/me/' + id, {
           method: 'POST',
@@ -85,6 +81,10 @@ const Posts = (props) => {
         } else if (resp2.staus === 401) {
           props.refreshTokens();
         }
+      } else {
+        fetchPosts();
+        setText('');
+        setImage(null);
       }
     } else if (resp.staus === 401) {
       props.refreshTokens();
@@ -115,15 +115,13 @@ const Posts = (props) => {
     if (!props.loggedIn) {
       props.history.push('/');
     }
-  }, [props.user, posts]);
+  }, [props.user]);
 
   return (
     <div className={styles.Posts}>
+      {console.log('POSTS', props.history)}
       <Row className={styles.Row}>
-        <Col sm={12} md={4} lg={5} className={styles.Reklam}>
-          <h3>Reklam</h3>
-        </Col>
-        <Col sm={12} md={8} lg={7} className={styles.PostCol}>
+        <Col sm={12} md={12} lg={7} className={styles.PostCol}>
           <h4>Post a new post</h4>
           <div className={styles.NewPostSection}>
             <textarea

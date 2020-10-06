@@ -12,7 +12,7 @@ const Main = (props) => {
   return (
     <>
       <div className={styles.Home} id='home'>
-        <Dashboard history={props.history} />
+        <Dashboard socket={props.socket} history={props.history} />
       </div>
       <div className={`${styles.Container} ${styles.Events}`} id='events'>
         <Events />

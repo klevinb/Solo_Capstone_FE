@@ -35,6 +35,11 @@ export default function (state = [], action) {
         ...state,
         messages: action.payload,
       };
+    case 'LOCAL_MSG':
+      return {
+        ...state,
+        messages: state.messages.concat(action.payload),
+      };
     default:
       return state;
   }
