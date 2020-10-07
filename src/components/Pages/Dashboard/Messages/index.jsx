@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styles from './Messages.module.scss';
-import { Image } from 'react-bootstrap';
+import { Image, Badge, Popover, OverlayTrigger } from 'react-bootstrap';
+import { FcInfo } from 'react-icons/fc';
 
 const mapStateToProps = (state) => state;
-
-const mapDispatchToProps = (dispatch, props) => ({
-  setActiveUsers: (users) =>
-    dispatch({
-      type: 'SET_ACTIVE_USERS',
-      payload: users,
-    }),
-  saveMsg: (msgs) =>
-    dispatch({
-      type: 'SET_MESSAGES',
-      payload: msgs,
-    }),
-});
 
 const Messages = (props) => {
   const [selected, setSelected] = useState(null);
   const [text, setText] = useState('');
 
+  const popover = (
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Important Info</Popover.Title>
+      <Popover.Content>
+        You are not following {selected && selected.name}, if you want to keep
+        the conversation on your profile and talk to them later just click the{' '}
+        <button>Follow</button>
+      </Popover.Content>
+    </Popover>
+  );
+
   return (
     <div className={styles.Container}>
       <div className={styles.ActiveUsers}>
-        {/* {props.activeUsers
-        .filter((user) => user !== props.user.username)
-        .map((user) => (
-            <p>{user}</p>
-        ))} */}
         {props.user.following.map((user, key) => (
           <div
             key={key}
@@ -44,27 +38,52 @@ const Messages = (props) => {
             <p>
               {user.name} {user.surname}
             </p>
+            {user.messages.find(
+              (message) => message.username === props.user.username
+            ) &&
+              user.messages.find(
+                (message) => message.username === props.user.username
+              ).count > 0 && (
+                <Badge variant='light' className={styles.Notification}>
+                  {
+                    user.messages.find(
+                      (message) => message.username === props.user.username
+                    ).count
+                  }
+                </Badge>
+              )}
           </div>
         ))}
       </div>
       {selected && (
         <div className={styles.ChatBox}>
+          {selected.ifollow === false && (
+            <div className={styles.BluredChat}>
+              <OverlayTrigger
+                trigger='click'
+                placement='right'
+                overlay={popover}
+              >
+                <FcInfo />
+              </OverlayTrigger>
+            </div>
+          )}
           <div className={styles.ChatHead}>
             <span>{selected.name}</span>
           </div>
           <div className={styles.Messages}>
             <ul id='messages' style={{ listStyle: 'none' }}>
-              {props.messages.map((msg, i) => (
+              {props.messages.map((msg, key) => (
                 <>
                   {props.user.username === msg.from &&
                   msg.to === selected.username ? (
-                    <li key={i} className='text-right'>
+                    <li key={key} className='text-right'>
                       {msg.text}
                     </li>
                   ) : (
                     props.user.username === msg.to &&
                     msg.from === selected.username && (
-                      <li key={i}>{msg.text}</li>
+                      <li key={key}>{msg.text}</li>
                     )
                   )}
                 </>
@@ -76,6 +95,9 @@ const Messages = (props) => {
               type='text'
               onChange={(e) => setText(e.target.value)}
               value={text}
+              onMouseDown={() =>
+                props.clearMsgCount(selected.username, props.user.username)
+              }
             />
             <button
               onClick={() => {
@@ -92,4 +114,4 @@ const Messages = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Messages);
+export default connect(mapStateToProps, null)(Messages);

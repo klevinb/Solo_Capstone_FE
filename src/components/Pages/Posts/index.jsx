@@ -24,7 +24,7 @@ const Posts = (props) => {
   const [image, setImage] = useState(null);
 
   const followUser = async (user) => {
-    const resp = await fetch(url + '/api/users/follow/' + user._id, {
+    const resp = await fetch(url + '/api/users/follow/' + user.username, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -35,7 +35,7 @@ const Posts = (props) => {
       const answer = await resp.json();
       props.follow({ _id: user._id, name: user.name, surname: user.surname });
     } else if (resp.status === 401) {
-      props.refreshTokens();
+      props.refreshTokens(props.history);
     }
   };
 
@@ -45,11 +45,10 @@ const Posts = (props) => {
     });
 
     if (resp.ok) {
-      console.log('HERE');
       const posts = await resp.json();
       setPosts(posts.reverse());
     } else if (resp.status === 401) {
-      props.refreshTokens();
+      props.refreshTokens(props.history);
     }
   };
 
@@ -79,7 +78,7 @@ const Posts = (props) => {
           setText('');
           setImage(null);
         } else if (resp2.staus === 401) {
-          props.refreshTokens();
+          props.refreshTokens(props.history);
         }
       } else {
         fetchPosts();
@@ -87,7 +86,7 @@ const Posts = (props) => {
         setImage(null);
       }
     } else if (resp.staus === 401) {
-      props.refreshTokens();
+      props.refreshTokens(props.history);
     }
   };
 
@@ -119,7 +118,6 @@ const Posts = (props) => {
 
   return (
     <div className={styles.Posts}>
-      {console.log('POSTS', props.history)}
       <Row className={styles.Row}>
         <Col sm={12} md={12} lg={7} className={styles.PostCol}>
           <h4>Post a new post</h4>

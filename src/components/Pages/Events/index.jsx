@@ -22,7 +22,7 @@ const Events = (props) => {
       });
       const redirectUrl = await resp.json();
       if (resp.ok) {
-        window.location = redirectUrl;
+        window.open(redirectUrl, '_blank');
       }
     } else {
       alert('Please login to buy an Event');
@@ -77,6 +77,10 @@ const Events = (props) => {
                         {event.performer}
                       </Card.Text>
                     )}
+                    <Card.Text>
+                      <span className={styles.Bold}>Date </span>
+                      {event.startDate.slice(0, 10)} 21:30
+                    </Card.Text>
 
                     <button
                       onClick={() => buyEvent(event._id)}

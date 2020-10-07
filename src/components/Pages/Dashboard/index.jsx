@@ -33,6 +33,16 @@ const mapDispatchToProps = (dispatch, props) => ({
       type: 'LOCAL_MSG',
       payload: msg,
     }),
+  addUnknownUser: (user) =>
+    dispatch({
+      type: 'UNKNOWN_USER',
+      payload: user,
+    }),
+  setAllUsers: (users) =>
+    dispatch({
+      type: 'SET_ALL_USERS',
+      payload: users,
+    }),
   refreshTokens: (history) => dispatch(refreshTokens(history)),
 });
 
@@ -62,12 +72,20 @@ class Dashboard extends React.Component {
       credentials: 'include',
     });
 
+    const users = await fetch(url + '/api/users/', {
+      credentials: 'include',
+    });
+
     this.fetchMessages();
 
     if (resp.ok) {
       const data = await resp.json();
       this.props.setUser(data);
       localStorage.setItem('loggedIn', true);
+      if (users.ok) {
+        const data = await users.json();
+        this.props.setAllUsers(data);
+      }
     }
     if (resp.status === 401) {
       this.props.refreshTokens(this.props.history);
@@ -78,6 +96,7 @@ class Dashboard extends React.Component {
     if (localStorage.getItem('loggedIn')) {
       this.fetchUser();
     }
+
     this.setState({ show: !this.props.loggedIn });
     const connectionOpt = {
       transports: ['websocket'],
@@ -86,8 +105,23 @@ class Dashboard extends React.Component {
     this.socket.on('online', (data) => {
       this.props.setActiveUsers(data);
     });
+    this.socket.on('clearMsgCount', () => {
+      this.fetchUser();
+    });
     this.socket.on('message', (msg) => {
-      this.fetchMessages();
+      const findUser = this.props.user.following.find(
+        (user) => user.username === msg.from
+      );
+      if (findUser) {
+        this.fetchMessages();
+        this.fetchUser();
+      } else {
+        const user = this.props.users.find(
+          (user) => user.username === msg.from
+        );
+        this.props.addUnknownUser({ ...user, ifollow: false });
+        this.fetchMessages();
+      }
     });
     this.setUsername();
   }
@@ -118,6 +152,14 @@ class Dashboard extends React.Component {
       });
       this.props.saveNewMsg({ to, from, text: message });
     }
+  };
+
+  clearMsgCount = (username, refUser) => {
+    console.log(username, refUser);
+    this.socket.emit('clearMsgCount', {
+      username,
+      refUser,
+    });
   };
 
   render() {
@@ -185,12 +227,16 @@ class Dashboard extends React.Component {
                   <Events events={this.props.user.events} />
                 )}
                 {this.state.selected === 'Messages' && (
-                  <Messages sendMsg={this.sendMsg} />
+                  <Messages
+                    sendMsg={this.sendMsg}
+                    clearMsgCount={this.clearMsgCount}
+                  />
                 )}
               </Col>
             </Row>
           </div>
         )}
+
         {this.state.show && <Home />}
       </>
     );

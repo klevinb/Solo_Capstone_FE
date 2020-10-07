@@ -40,6 +40,20 @@ export default function (state = [], action) {
         ...state,
         messages: state.messages.concat(action.payload),
       };
+    case 'UNKNOWN_USER':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          following: [...state.user.following, { ...action.payload }],
+        },
+      };
+    case 'SET_ALL_USERS':
+      return {
+        ...state,
+        users: action.payload,
+      };
+
     default:
       return state;
   }

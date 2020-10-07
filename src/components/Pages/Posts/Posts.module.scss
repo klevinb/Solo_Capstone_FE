@@ -6,6 +6,13 @@
   padding: 20vh 0 0 50px;
   position: relative;
   overflow-y: auto;
+  .ScrollToTop {
+    color: whitesmoke;
+    font-size: 40px;
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+  }
   .Row {
     color: whitesmoke;
     width: 100%;
@@ -91,6 +98,9 @@
 
 @media (max-width: 575px) {
   .Posts {
+    .ScrollToTop {
+      font-size: 30px;
+    }
     .Row {
       padding-top: 8vh;
     }

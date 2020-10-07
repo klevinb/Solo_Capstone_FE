@@ -38,14 +38,24 @@ const Nav = (props) => {
               props.location.pathname !== '/register' && (
                 <>
                   {props.loggedIn ? (
-                    <li
-                      onClick={() => {
-                        setShow(!show);
-                        props.history.push('/posts');
-                      }}
-                    >
-                      <a href='#'>Posts</a>
-                    </li>
+                    <>
+                      <li
+                        onClick={() => {
+                          setShow(!show);
+                          props.history.push('/posts');
+                        }}
+                      >
+                        <a href='#'>Posts</a>
+                      </li>
+                      <li
+                        onClick={() => {
+                          setShow(!show);
+                          props.history.push('/#home');
+                        }}
+                      >
+                        <a href='#home'>Profile</a>
+                      </li>
+                    </>
                   ) : (
                     <li
                       onClick={() => {
@@ -64,14 +74,6 @@ const Nav = (props) => {
                   >
                     <a href='#events'>Events</a>
                   </li>
-                  <li
-                    onClick={() => {
-                      setShow(!show);
-                      props.history.push('/#contacts');
-                    }}
-                  >
-                    <a href='#contacts'>Contacts</a>
-                  </li>
                 </>
               )}
             {props.loggedIn ? (
@@ -89,10 +91,10 @@ const Nav = (props) => {
 
                   <Dropdown.Menu>
                     <Dropdown.Item
-                      href='#home'
-                      onClick={() => props.history.push('/#home')}
+                      href='#contacts'
+                      onClick={() => props.history.push('/#contacts')}
                     >
-                      My Profile
+                      Contacts
                     </Dropdown.Item>
 
                     <Dropdown.Item

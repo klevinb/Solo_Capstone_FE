@@ -9,6 +9,7 @@ const initialStore = {
   user: null,
   activeUsers: [],
   messages: [],
+  users: [],
 };
 
 export default function configureStore() {
