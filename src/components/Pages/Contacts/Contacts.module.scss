@@ -2,4 +2,46 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 100%;
+  .Row {
+    svg {
+      color: whitesmoke;
+      font-size: 250px;
+    }
+    h3 {
+      color: whitesmoke;
+      font-weight: bold;
+      padding: 50px;
+      text-align: center;
+    }
+  }
+  .Toast {
+    position: absolute;
+    top: 6%;
+    right: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .Contacts {
+    height: 100%;
+    .Row {
+      .IconCol {
+        svg {
+          font-size: 100px;
+          margin-bottom: 20px;
+        }
+        display: flex;
+        justify-content: center;
+      }
+      .InfoCol {
+        input {
+          border-radius: 25px;
+        }
+      }
+    }
+    .Toast {
+      right: 3%;
+    }
+  }
 }
