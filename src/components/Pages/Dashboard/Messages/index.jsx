@@ -11,7 +11,7 @@ const Messages = (props) => {
   const [text, setText] = useState('');
 
   const popover = (
-    <Popover id='popover-basic'>
+    <Popover id='popover-positioned-left'>
       <Popover.Title as='h3'>Important Info</Popover.Title>
       <Popover.Content>
         You are not following {selected && selected.name}, if you want to keep
@@ -28,7 +28,13 @@ const Messages = (props) => {
           <div
             key={key}
             className={styles.User}
-            onClick={() => setSelected(user)}
+            onClick={() => {
+              if (selected === user) {
+                setSelected(null);
+              } else {
+                setSelected(user);
+              }
+            }}
           >
             <Image
               src={
@@ -61,7 +67,7 @@ const Messages = (props) => {
             <div className={styles.BluredChat}>
               <OverlayTrigger
                 trigger='click'
-                placement='right'
+                placement='left'
                 overlay={popover}
               >
                 <FcInfo />
@@ -95,9 +101,14 @@ const Messages = (props) => {
               type='text'
               onChange={(e) => setText(e.target.value)}
               value={text}
-              onMouseDown={() =>
-                props.clearMsgCount(selected.username, props.user.username)
-              }
+              disabled={selected.ifollow === false ? true : false}
+              onMouseDown={() => {
+                if (selected.ifollow === false) {
+                  this.popover('show');
+                } else {
+                  props.clearMsgCount(selected.username, props.user.username);
+                }
+              }}
             />
             <button
               onClick={() => {
