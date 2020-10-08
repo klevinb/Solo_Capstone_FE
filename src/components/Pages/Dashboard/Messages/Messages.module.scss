@@ -37,28 +37,30 @@
   }
 
   .ChatBox {
+    border: 0.5px solid whitesmoke;
     height: 70%;
     position: relative;
     .ChatHead {
       background-color: gray;
       padding: 5px 10px;
+      height: 10%;
       span {
         font: 15px;
       }
     }
     .Messages {
-      border-left: 1px solid whitesmoke;
-      border-right: 1px solid whitesmoke;
-
       height: 80%;
       overflow-y: auto;
-      padding: 30px;
+      padding: 20px 13px;
+
       ul {
         padding: 0;
       }
     }
     .Controles {
       background-color: gray;
+      height: 10%;
+      padding: 3px;
       input {
         width: 80%;
       }
@@ -72,6 +74,7 @@
         font-size: 15px;
         text-align: center;
         width: 20%;
+        background-color: unset !important;
       }
     }
     .BluredChat {
@@ -81,6 +84,44 @@
       svg {
         font-size: 25px;
       }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .Container {
+    .ActiveUsers {
+      .User {
+        p {
+          font-size: 13px;
+        }
+        img {
+          width: 65px;
+          height: 65px;
+        }
+        .Notification {
+          position: absolute;
+          top: 8%;
+          right: 20%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1000px) {
+  .Container {
+    padding: 0 100px;
+    .ChatBox {
+      height: 70%;
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .Container {
+    .ChatBox {
+      width: 450px !important;
     }
   }
 }
