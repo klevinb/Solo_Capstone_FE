@@ -3,7 +3,8 @@
   width: 100%;
   background-image: linear-gradient(350deg, #060c14 45%, #0d1527 70%);
   display: flex;
-  padding: 20vh 0 0 50px;
+  justify-content: center;
+  padding-top: 20vh;
   position: relative;
   overflow-y: auto;
   .ScrollToTop {
@@ -15,7 +16,7 @@
   }
   .Row {
     color: whitesmoke;
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: center;
     .PostCol {
@@ -50,7 +51,8 @@
       display: flex !important;
       flex-direction: column !important;
       img {
-        width: 70%;
+        width: 400px;
+        height: 400px;
         justify-self: center;
       }
       .CardBody {
@@ -98,18 +100,33 @@
 
 @media (max-width: 575px) {
   .Posts {
-    .ScrollToTop {
-      font-size: 30px;
-    }
+    padding-top: 10vh !important;
     .Row {
-      padding-top: 8vh;
+      width: 100%;
+      .Card {
+        img {
+          width: 300px;
+          height: 300px;
+        }
+      }
     }
-    display: flex;
-    justify-content: center;
-
-    padding: 13px;
   }
-  .Reklam {
-    display: none;
+}
+
+@media screen and (min-width: 576px) and (max-width: 1000px) {
+  .Posts {
+    padding: 10vh !important;
+    .Row {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1300px) {
+  .Posts {
+    padding: 10vh !important;
+    .Row {
+      width: 100%;
+    }
   }
 }

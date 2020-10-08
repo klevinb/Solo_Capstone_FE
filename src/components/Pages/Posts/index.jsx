@@ -119,7 +119,7 @@ const Posts = (props) => {
   return (
     <div className={styles.Posts}>
       <Row className={styles.Row}>
-        <Col sm={12} md={12} lg={7} className={styles.PostCol}>
+        <Col sm={12} className={styles.PostCol}>
           <h4>Post a new post</h4>
           <div className={styles.NewPostSection}>
             <textarea

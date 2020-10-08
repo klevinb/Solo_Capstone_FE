@@ -86,20 +86,25 @@
 
     .Show {
       position: absolute;
-      top: 100%;
+      top: 80%;
       right: 0;
       width: 100%;
       z-index: 99;
 
       ol {
         list-style: none;
-        padding: 20px;
-        background-color: rgba(211, 211, 211, 0.337);
+        background-color: rgba(128, 128, 128, 0.727);
         width: 100%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
 
         li {
+          border: 0;
           a {
             color: whitesmoke;
+            font-weight: bold;
           }
         }
       }
@@ -132,11 +137,16 @@
       z-index: 99;
       ol {
         list-style: none;
-        padding: 20px;
-        background-color: rgba(211, 211, 211, 0.337);
+        background-color: rgba(128, 128, 128, 0.919);
         width: 100%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
 
         li {
+          border: 0;
+          font-size: 20px;
           a {
             color: whitesmoke;
           }
@@ -153,6 +163,7 @@
       color: whitesmoke;
       font-weight: bolder;
       padding: 10px 20px 10px 20px;
+      cursor: pointer;
     }
 
     a:hover {

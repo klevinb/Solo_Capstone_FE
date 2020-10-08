@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 const Nav = (props) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {}, [props.user]);
 

@@ -46,49 +46,66 @@
       font-size: 15px;
       input {
         width: 95%;
+        margin-bottom: 10px;
       }
     }
   }
+  .SubmitButton {
+    margin-top: 20px;
+  }
+
   .PassButton {
-    border: 1px solid transparent;
-    color: black;
-    font-size: unset;
-    border-radius: 0;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 250px;
     padding: 0px !important;
-    box-shadow: unset;
   }
 }
 
-@media screen and (min-width: 576px) and (max-width: 900px) {
-  .PassButton {
-    border: 1px solid transparent;
-    color: black;
-    font-size: unset;
-    border-radius: 0;
-    padding: 0px !important;
-    box-shadow: unset;
-  }
+@media screen and (min-width: 576px) and (max-width: 1000px) {
   .Settings {
+    padding: 20px 100px;
     form {
       font-size: 20px;
       input {
         width: 95%;
+        margin-bottom: 10px;
       }
+    }
+    .SubmitButton {
+      margin-top: 20px;
+    }
+
+    .PassButton {
+      margin-bottom: 10px;
+      margin-right: 10px;
+      width: 250px;
+      height: 40px;
+      font-size: 15px !important;
+      padding: 0px !important;
     }
   }
 }
 
-@media (max-width: 575px) {
-  .PassButton {
-    font-size: 15px;
-    margin-right: 10px;
-  }
-}
+@media (min-width: 1000px) {
+  .Settings {
+    .SubmitButton {
+      margin-top: 20px;
+    }
+    form {
+      font-size: 20px;
+      input {
+        width: 95%;
+        margin-bottom: 10px;
+      }
+    }
 
-@media screen and (min-width: 576px) and (max-width: 1200px) {
-  .PassButton {
-    font-size: 15px;
-    margin-right: 10px;
-    padding: 0px 10px 0px 10px;
+    .PassButton {
+      margin-bottom: 10px;
+      margin-right: 10px;
+      font-size: 15px !important;
+      width: 150px;
+      padding: 0px !important;
+    }
   }
 }

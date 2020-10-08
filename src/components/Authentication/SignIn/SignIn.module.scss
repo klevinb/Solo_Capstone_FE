@@ -1,12 +1,3 @@
-.BG {
-  background-image: url('/assets/mainpage.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-}
 .Container {
   height: 100%;
   width: 100%;
@@ -49,13 +40,7 @@
     margin: 20px;
     padding: 20px;
   }
-  .BG {
-    background-position: 50%;
-  }
 }
 
 @media screen and (min-width: 576px) {
-  .BG {
-    background-position: 50%;
-  }
 }

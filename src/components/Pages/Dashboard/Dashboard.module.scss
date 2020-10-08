@@ -1,4 +1,5 @@
 .Dashboard {
+  padding-top: 5vh;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -16,12 +17,11 @@
         }
       }
       img {
-        max-width: 70%;
         object-fit: cover;
-        max-height: 100%;
         width: 300px;
         height: 300px;
         border-radius: 25px;
+        margin-bottom: 5vh;
       }
     }
   }
@@ -55,6 +55,16 @@
 
 @media (max-width: 575px) {
   .Dashboard {
+    height: auto;
+    .Row {
+      .Details {
+        img {
+          width: 150px;
+          height: 150px;
+          margin-bottom: 5vh;
+        }
+      }
+    }
     .Menu {
       .ListGroup {
         width: unset;
@@ -69,25 +79,28 @@
   }
 }
 
-@media screen and (min-width: 576px) and (max-width: 900px) {
+@media screen and (min-width: 576px) and (max-width: 1000px) {
   .Dashboard {
+    height: auto;
+    padding-top: 0;
     .Menu {
       .ListGroup {
         width: unset;
         flex-direction: unset;
-        font-size: unset;
+        font-size: 20px;
       }
     }
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   .Dashboard {
+    height: auto;
     .Menu {
       .ListGroup {
         width: unset;
         flex-direction: unset;
-        font-size: unset;
+        font-size: 25px;
       }
     }
   }
