@@ -43,6 +43,11 @@ const mapDispatchToProps = (dispatch, props) => ({
       type: 'SET_ALL_USERS',
       payload: users,
     }),
+  incMsgCount: (user) =>
+    dispatch({
+      type: 'INC_MSG_COUNT',
+      payload: user,
+    }),
   refreshTokens: (history) => dispatch(refreshTokens(history)),
 });
 
@@ -50,8 +55,20 @@ class Dashboard extends React.Component {
   socket = null;
 
   state = {
-    show: false,
+    show: true,
     selected: 'Events',
+  };
+
+  fetchUnreadMessages = async () => {
+    const unReadMessages = await fetch(url + '/api/messages/me', {
+      credentials: 'include',
+    });
+    if (unReadMessages.ok) {
+      const data = await unReadMessages.json();
+      data.forEach((user) =>
+        this.props.addUnknownUser({ ...user, ifollow: false })
+      );
+    }
   };
 
   fetchMessages = async () => {
@@ -59,25 +76,16 @@ class Dashboard extends React.Component {
       credentials: 'include',
     });
 
-    const unReadMessages = await fetch(url + '/api/messages/me', {
-      credentials: 'include',
-    });
-
     if (messages.ok) {
       const data = await messages.json();
       this.props.saveMsg(data);
-      if (unReadMessages.ok) {
-        const data = await unReadMessages.json();
-        data.forEach((user) =>
-          this.props.addUnknownUser({ ...user, ifollow: false })
-        );
-      }
     } else if (messages.status === 401) {
       this.props.refreshTokens(this.props.history);
     }
   };
 
   fetchUser = async () => {
+    this.setState({ show: false });
     const resp = await fetch(url + '/api/users/me', {
       credentials: 'include',
     });
@@ -87,11 +95,13 @@ class Dashboard extends React.Component {
     });
 
     this.fetchMessages();
+    this.fetchUnreadMessages();
 
     if (resp.ok) {
       const data = await resp.json();
       this.props.setUser(data);
       localStorage.setItem('loggedIn', true);
+
       if (users.ok) {
         const data = await users.json();
         this.props.setAllUsers(data);
@@ -107,7 +117,6 @@ class Dashboard extends React.Component {
       this.fetchUser();
     }
 
-    this.setState({ show: !this.props.loggedIn });
     const connectionOpt = {
       transports: ['websocket'],
     };
@@ -124,11 +133,12 @@ class Dashboard extends React.Component {
       );
       if (findUser) {
         this.fetchMessages();
-        this.fetchUser();
+        this.porps.incMsgCount();
       } else {
         const user = this.props.users.find(
           (user) => user.username === msg.from
         );
+        console.log('user', user);
         if (user._id !== this.porps.user._id) {
           this.props.addUnknownUser({ ...user, ifollow: false });
           this.fetchMessages();
@@ -177,7 +187,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <>
-        {localStorage.getItem('loggedIn') && this.props.user && (
+        {this.props.user && (
           <div className={styles.Dashboard}>
             <Row className={styles.Row}>
               <Col sm={12} lg={6}>

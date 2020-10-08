@@ -10,10 +10,11 @@ import { logoutThunk } from '../../../Utilities';
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch, props) => ({
   logout: () => dispatch(logoutThunk()),
+  clearState: () => dispatch({ type: 'CLEAR_STATE' }),
 });
 
 const Nav = (props) => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {}, [props.user]);
 
@@ -92,7 +93,10 @@ const Nav = (props) => {
                   <Dropdown.Menu>
                     <Dropdown.Item
                       href='#contacts'
-                      onClick={() => props.history.push('/#contacts')}
+                      onClick={() => {
+                        props.history.push('/#contacts');
+                        setShow(!show);
+                      }}
                     >
                       Contacts
                     </Dropdown.Item>
@@ -101,8 +105,10 @@ const Nav = (props) => {
                       className={styles.Logout}
                       onClick={() => {
                         localStorage.removeItem('loggedIn');
+                        props.clearState();
                         props.logout();
                         props.history.push('/#contacts');
+
                         setShow(!show);
                       }}
                     >
@@ -112,7 +118,7 @@ const Nav = (props) => {
                 </Dropdown>
               </li>
             ) : (
-              <li>
+              <li onClick={() => setShow(!show)}>
                 <Link to='/login'>Login</Link>
               </li>
             )}

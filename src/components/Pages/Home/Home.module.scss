@@ -1,27 +1,22 @@
 .Container {
   height: 100%;
   width: 100%;
-  position: absolute;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 575px) {
   .Container {
-    background-position-x: center;
-    display: flex;
-    align-items: center;
-    padding: 50px;
   }
 }
 
 @media screen and (min-width: 576px) {
   .Container {
-    background-position: 50%;
   }
 }
 
 @media (min-width: 1200px) {
   .Container {
-    background-size: contain;
   }
 }

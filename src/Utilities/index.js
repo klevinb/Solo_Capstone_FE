@@ -25,7 +25,8 @@ export const refreshTokens = (history) => {
       );
 
       if (resp.status === 200) {
-        history.push('/');
+        console.log(history.location.pathname);
+        history.push(history.location.pathname);
       }
       if (resp.status === 401) {
         localStorage.removeItem('loggedIn');
