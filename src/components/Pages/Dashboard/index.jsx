@@ -59,9 +59,19 @@ class Dashboard extends React.Component {
       credentials: 'include',
     });
 
+    const unReadMessages = await fetch(url + '/api/messages/me', {
+      credentials: 'include',
+    });
+
     if (messages.ok) {
       const data = await messages.json();
       this.props.saveMsg(data);
+      if (unReadMessages.ok) {
+        const data = await unReadMessages.json();
+        data.forEach((user) =>
+          this.props.addUnknownUser({ ...user, ifollow: false })
+        );
+      }
     } else if (messages.status === 401) {
       this.props.refreshTokens(this.props.history);
     }
@@ -119,8 +129,10 @@ class Dashboard extends React.Component {
         const user = this.props.users.find(
           (user) => user.username === msg.from
         );
-        this.props.addUnknownUser({ ...user, ifollow: false });
-        this.fetchMessages();
+        if (user._id !== this.porps.user._id) {
+          this.props.addUnknownUser({ ...user, ifollow: false });
+          this.fetchMessages();
+        }
       }
     });
     this.setUsername();
