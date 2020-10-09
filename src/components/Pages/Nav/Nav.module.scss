@@ -1,110 +1,114 @@
-.Nav {
-  position: absolute;
+.Container {
   width: 100%;
-  color: whitesmoke;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 99;
-  // background-color: rgb(13, 21, 39);
-  .UserInfo {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  .Nav {
+    color: whitesmoke;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(13, 21, 39);
+    .UserInfo {
+      img {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+      }
+      button {
+        background-color: transparent;
+        color: whitesmoke;
+        border: 0;
+      }
+
+      a {
+        color: black !important;
+      }
+      .Logout {
+        color: red !important;
+      }
+      a:hover {
+        color: rgb(204, 19, 204) !important;
+      }
+    }
     img {
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-    }
-    button {
-      background-color: transparent;
-      color: whitesmoke;
-      border: 0;
+      width: 20%;
     }
 
-    a {
-      color: black !important;
+    .NavToggler {
+      display: none;
     }
-    .Logout {
-      color: red !important;
-    }
-    a:hover {
-      color: rgb(204, 19, 204) !important;
-    }
-  }
-  img {
-    width: 20%;
-  }
+    .NavLinks {
+      a {
+        text-decoration: none;
+        color: whitesmoke;
+        font-weight: bolder;
+        padding: 10px 20px 10px 20px;
+        cursor: pointer;
+      }
 
-  .NavToggler {
-    display: none;
-  }
-  .NavLinks {
-    a {
-      text-decoration: none;
-      color: whitesmoke;
-      font-weight: bolder;
-      padding: 10px 20px 10px 20px;
-      cursor: pointer;
-    }
+      a:hover {
+        color: rgb(204, 19, 204);
+        box-shadow: 0px 0px 3px 3px purple;
+      }
 
-    a:hover {
-      color: rgb(204, 19, 204);
-      box-shadow: 0px 0px 3px 3px purple;
-    }
-
-    ol {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      margin: 0;
-      cursor: pointer;
-      li {
-        padding-right: 20px;
-        font-size: 1.2rem;
+      ol {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        cursor: pointer;
+        li {
+          padding-right: 20px;
+          font-size: 1.2rem;
+        }
       }
     }
   }
 }
-
 @media (max-width: 575px) {
-  .Nav {
-    img {
-      width: 20%;
-    }
-    .NavToggler {
-      display: inline;
-      position: absolute;
-      right: 5%;
-      font-size: 45px;
-    }
-    .NavLinks {
-      display: none !important;
-      ol {
-        display: none;
+  .Container {
+    .Nav {
+      img {
+        width: 20%;
       }
-    }
+      .NavToggler {
+        display: inline;
+        position: absolute;
+        right: 5%;
+        font-size: 45px;
+      }
+      .NavLinks {
+        display: none !important;
+        ol {
+          display: none;
+        }
+      }
 
-    .Show {
-      position: absolute;
-      top: 80%;
-      right: 0;
-      width: 100%;
-      z-index: 99;
-
-      ol {
-        list-style: none;
-        background-color: rgba(128, 128, 128, 0.727);
+      .Show {
+        position: absolute;
+        top: 80%;
+        right: 0;
         width: 100%;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
+        z-index: 99;
 
-        li {
-          border: 0;
-          a {
-            color: whitesmoke;
-            font-weight: bold;
+        ol {
+          list-style: none;
+          background-color: rgba(128, 128, 128, 0.727);
+          width: 100%;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+
+          li {
+            border: 0;
+            a {
+              color: whitesmoke;
+              font-weight: bold;
+            }
           }
         }
       }

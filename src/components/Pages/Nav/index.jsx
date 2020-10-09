@@ -20,109 +20,111 @@ const Nav = (props) => {
 
   return (
     <>
-      <div className={styles.Nav}>
-        <Link to='/'>
-          <Image src='./assets/YOLO.png' />
-        </Link>
+      <div className={styles.Container}>
+        <div className={styles.Nav}>
+          <Link to='/'>
+            <Image src='./assets/YOLO.png' />
+          </Link>
 
-        <MenuIcon
-          className={styles.NavToggler}
-          onClick={() => setShow(!show)}
-        />
-        <div
-          className={
-            show ? `${styles.NavLinks}` : `${(styles.NavLinks, styles.Show)}`
-          }
-        >
-          <ol>
-            {props.location.pathname !== '/login' &&
-              props.location.pathname !== '/register' && (
-                <>
-                  {props.loggedIn ? (
-                    <>
-                      <li
-                        onClick={() => {
-                          setShow(!show);
-                          props.history.push('/posts');
-                        }}
-                      >
-                        <a href='#'>Posts</a>
-                      </li>
+          <MenuIcon
+            className={styles.NavToggler}
+            onClick={() => setShow(!show)}
+          />
+          <div
+            className={
+              show ? `${styles.NavLinks}` : `${(styles.NavLinks, styles.Show)}`
+            }
+          >
+            <ol>
+              {props.location.pathname !== '/login' &&
+                props.location.pathname !== '/register' && (
+                  <>
+                    {props.loggedIn ? (
+                      <>
+                        <li
+                          onClick={() => {
+                            setShow(!show);
+                            props.history.push('/posts');
+                          }}
+                        >
+                          <a href='#'>Posts</a>
+                        </li>
+                        <li
+                          onClick={() => {
+                            setShow(!show);
+                            props.history.push('/#home');
+                          }}
+                        >
+                          <a href='#home'>Profile</a>
+                        </li>
+                      </>
+                    ) : (
                       <li
                         onClick={() => {
                           setShow(!show);
                           props.history.push('/#home');
                         }}
                       >
-                        <a href='#home'>Profile</a>
+                        <a href='#home'>Home</a>
                       </li>
-                    </>
-                  ) : (
+                    )}
                     <li
                       onClick={() => {
                         setShow(!show);
-                        props.history.push('/#home');
+                        props.history.push('/#events');
                       }}
                     >
-                      <a href='#home'>Home</a>
+                      <a href='#events'>Events</a>
                     </li>
-                  )}
-                  <li
-                    onClick={() => {
-                      setShow(!show);
-                      props.history.push('/#events');
-                    }}
-                  >
-                    <a href='#events'>Events</a>
-                  </li>
-                </>
+                  </>
+                )}
+              {props.loggedIn ? (
+                <li className={styles.UserInfo}>
+                  <Dropdown>
+                    <Dropdown.Toggle variant='transparent' id='dropdown-basic'>
+                      <Image
+                        src={
+                          props.user && props.user.image
+                            ? props.user.image
+                            : 'https://via.placeholder.com/300x200'
+                        }
+                      />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        href='#contacts'
+                        onClick={() => {
+                          props.history.push('/#contacts');
+                          setShow(!show);
+                        }}
+                      >
+                        Contacts
+                      </Dropdown.Item>
+
+                      <Dropdown.Item
+                        className={styles.Logout}
+                        onClick={() => {
+                          localStorage.removeItem('loggedIn');
+                          props.clearState();
+                          props.logout();
+                          props.history.push('/#contacts');
+
+                          setShow(!show);
+                        }}
+                      >
+                        Log out
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </li>
+              ) : (
+                <li onClick={() => setShow(!show)}>
+                  <Link to='/login'>Login</Link>
+                </li>
               )}
-            {props.loggedIn ? (
-              <li className={styles.UserInfo}>
-                <Dropdown>
-                  <Dropdown.Toggle variant='transparent' id='dropdown-basic'>
-                    <Image
-                      src={
-                        props.user && props.user.image
-                          ? props.user.image
-                          : 'https://via.placeholder.com/300x200'
-                      }
-                    />
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      href='#contacts'
-                      onClick={() => {
-                        props.history.push('/#contacts');
-                        setShow(!show);
-                      }}
-                    >
-                      Contacts
-                    </Dropdown.Item>
-
-                    <Dropdown.Item
-                      className={styles.Logout}
-                      onClick={() => {
-                        localStorage.removeItem('loggedIn');
-                        props.clearState();
-                        props.logout();
-                        props.history.push('/#contacts');
-
-                        setShow(!show);
-                      }}
-                    >
-                      Log out
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </li>
-            ) : (
-              <li onClick={() => setShow(!show)}>
-                <Link to='/login'>Login</Link>
-              </li>
-            )}
-          </ol>
+            </ol>
+          </div>
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 .Posts {
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(350deg, #060c14 45%, #0d1527 70%);
+  // background-image: linear-gradient(350deg, #060c14 45%, #0d1527 70%);
   display: flex;
   justify-content: center;
   padding-top: 20vh;
@@ -100,7 +100,8 @@
 
 @media (max-width: 575px) {
   .Posts {
-    padding-top: 10vh !important;
+    padding-top: 5vh;
+    height: auto;
     .Row {
       width: 100%;
       .Card {
@@ -115,7 +116,8 @@
 
 @media screen and (min-width: 576px) and (max-width: 1000px) {
   .Posts {
-    padding: 10vh !important;
+    padding: 5vh 10vh 5vh !important;
+    height: auto;
     .Row {
       width: 100%;
     }
@@ -125,6 +127,7 @@
 @media screen and (min-width: 1001px) and (max-width: 1300px) {
   .Posts {
     padding: 10vh !important;
+    height: auto;
     .Row {
       width: 100%;
     }

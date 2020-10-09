@@ -101,13 +101,9 @@ const Messages = (props) => {
               type='text'
               onChange={(e) => setText(e.target.value)}
               value={text}
-              disabled={selected.ifollow === false ? true : false}
+              // disabled={selected.ifollow === false ? true : false}
               onMouseDown={() => {
-                if (selected.ifollow === false) {
-                  this.popover('show');
-                } else {
-                  props.clearMsgCount(selected.username, props.user.username);
-                }
+                props.clearMsgCount(selected.username, props.user.username);
               }}
             />
             <button

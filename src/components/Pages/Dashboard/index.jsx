@@ -65,9 +65,14 @@ class Dashboard extends React.Component {
     });
     if (unReadMessages.ok) {
       const data = await unReadMessages.json();
-      data.forEach((user) =>
-        this.props.addUnknownUser({ ...user, ifollow: false })
-      );
+      data.forEach((user) => {
+        const iFollow = this.props.user.following.find(
+          (user) => user.username === user.username
+        );
+        if (!iFollow) {
+          this.props.addUnknownUser({ ...user, ifollow: false });
+        }
+      });
     }
   };
 
@@ -84,28 +89,30 @@ class Dashboard extends React.Component {
     }
   };
 
+  fetchAllUsers = async () => {
+    const users = await fetch(url + '/api/users/', {
+      credentials: 'include',
+    });
+
+    if (users.ok) {
+      const data = await users.json();
+      this.props.setAllUsers(data);
+    }
+  };
+
   fetchUser = async () => {
     this.setState({ show: false });
     const resp = await fetch(url + '/api/users/me', {
       credentials: 'include',
     });
 
-    const users = await fetch(url + '/api/users/', {
-      credentials: 'include',
-    });
-
     this.fetchMessages();
     this.fetchUnreadMessages();
-
+    this.fetchAllUsers();
     if (resp.ok) {
       const data = await resp.json();
       this.props.setUser(data);
       localStorage.setItem('loggedIn', true);
-
-      if (users.ok) {
-        const data = await users.json();
-        this.props.setAllUsers(data);
-      }
     }
     if (resp.status === 401) {
       this.props.refreshTokens(this.props.history);
@@ -125,7 +132,7 @@ class Dashboard extends React.Component {
       this.props.setActiveUsers(data);
     });
     this.socket.on('clearMsgCount', () => {
-      this.fetchUser();
+      this.fetchAllUsers();
     });
     this.socket.on('message', (msg) => {
       const findUser = this.props.user.following.find(
@@ -133,13 +140,14 @@ class Dashboard extends React.Component {
       );
       if (findUser) {
         this.fetchMessages();
-        this.porps.incMsgCount();
+        // this.fetchAllUsers();
+        // this.fetchUser();
       } else {
         const user = this.props.users.find(
           (user) => user.username === msg.from
         );
-        console.log('user', user);
-        if (user._id !== this.porps.user._id) {
+
+        if (user._id !== this.props.user._id) {
           this.props.addUnknownUser({ ...user, ifollow: false });
           this.fetchMessages();
         }
