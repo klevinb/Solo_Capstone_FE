@@ -25,7 +25,7 @@ function Login(props) {
     });
     if (resp.ok) {
       localStorage.setItem('loggedIn', true);
-      props.history.push('/');
+      props.history.push('/profile');
     } else {
       setErrorMessage('Credentials are incorrect!');
       showError(true);

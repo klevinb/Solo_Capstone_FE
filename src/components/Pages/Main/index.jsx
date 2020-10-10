@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Main.module.scss';
-import Events from '../Events';
 import Contacts from '../Contacts';
 import Dashboard from '../Dashboard';
+import Home from '../Home';
 
 import { connect } from 'react-redux';
 
@@ -12,10 +12,7 @@ const Main = (props) => {
   return (
     <>
       <div className={styles.Home} id='home'>
-        <Dashboard socket={props.socket} history={props.history} />
-      </div>
-      <div className={`${styles.Container} ${styles.Events}`} id='events'>
-        <Events />
+        <Home />
       </div>
       <div className={`${styles.Container} ${styles.Contacts}`} id='contacts'>
         <Contacts />

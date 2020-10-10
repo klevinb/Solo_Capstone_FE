@@ -40,16 +40,6 @@
   padding: 150px;
 }
 
-.Events {
-  // background-color: #1b2845;
-  // background-image: linear-gradient(350deg, #0d1527 45%, #060c14 70%);
-}
-
-.Contacts {
-  // background-color: #1b2845;
-  // background-image: linear-gradient(350deg, #060c14 45%, #0d1527 70%);
-}
-
 @media (max-width: 575px) {
   .Container {
     padding: 50px 20px 0px 20px;
@@ -63,7 +53,7 @@
     background-position: center;
     display: flex;
     align-items: center;
-    padding: 50px 10px 10px 10px;
+    padding: 0px 10px 10px 10px;
 
     h1 {
       color: whitesmoke;
@@ -93,7 +83,7 @@
     height: auto;
   }
   .Home {
-    padding: 100px 30px;
+    padding: 30px 30px;
     height: 100%;
     align-items: unset;
   }
@@ -111,6 +101,6 @@
 @media (min-width: 1000px) {
   .Home {
     align-items: flex-start;
-    padding: 100px 30px;
+    padding: 0px 30px;
   }
 }

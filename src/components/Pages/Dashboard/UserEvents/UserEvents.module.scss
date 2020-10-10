@@ -1,0 +1,12 @@
+.Container {
+  height: 500px;
+  .Row {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    .Participants {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

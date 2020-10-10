@@ -27,8 +27,8 @@
   }
   .Menu {
     .Selected {
-      color: darkviolet;
-      font-weight: bold;
+      color: white;
+      font-weight: bolder !important;
     }
     width: 100%;
     display: flex;
@@ -44,10 +44,10 @@
         background-color: transparent;
         margin: 10px;
         border: 1px solid transparent;
-        font-weight: bold;
+        font-weight: normal;
       }
       .ListItem:hover {
-        color: darkviolet;
+        color: white;
       }
     }
   }
@@ -82,7 +82,6 @@
 @media screen and (min-width: 576px) and (max-width: 1000px) {
   .Dashboard {
     height: auto;
-    padding-top: 0;
     .Menu {
       .ListGroup {
         width: unset;
@@ -92,10 +91,22 @@
     }
   }
 }
-
-@media (min-width: 1000px) {
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
   .Dashboard {
-    height: auto;
+    height: 65%;
+    .Menu {
+      .ListGroup {
+        width: unset;
+        flex-direction: unset;
+        font-size: 25px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1300px) {
+  .Dashboard {
+    height: 100%;
     .Menu {
       .ListGroup {
         width: unset;

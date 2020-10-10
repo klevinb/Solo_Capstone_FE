@@ -50,10 +50,11 @@ const Events = (props) => {
 
   return (
     <>
-      <div className={styles.Events}>
+      <div className={styles.Container}>
+        <h3>Latest Events</h3>
         <Row className='row-cols-2'>
           {events.map((event, key) => (
-            <Col key={key} sm={6} lg={4}>
+            <Col key={key} sm={6} lg={4} className={styles.Col}>
               <Pulse>
                 <Card className={styles.Card}>
                   <Card.Img

@@ -6,6 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutThunk } from '../../../Utilities';
+import { join } from 'path';
 
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch, props) => ({
@@ -23,7 +24,7 @@ const Nav = (props) => {
       <div className={styles.Container}>
         <div className={styles.Nav}>
           <Link to='/'>
-            <Image src='./assets/YOLO.png' />
+            <Image src='/assets/yolo.png' />
           </Link>
 
           <MenuIcon
@@ -36,38 +37,43 @@ const Nav = (props) => {
             }
           >
             <ol>
-              {props.location.pathname !== '/login' &&
-                props.location.pathname !== '/register' && (
+              <>
+                {props.loggedIn ? (
                   <>
-                    {props.loggedIn ? (
-                      <>
-                        <li
-                          onClick={() => {
-                            setShow(!show);
-                            props.history.push('/posts');
-                          }}
-                        >
-                          <a href='#'>Posts</a>
-                        </li>
-                        <li
-                          onClick={() => {
-                            setShow(!show);
-                            props.history.push('/#home');
-                          }}
-                        >
-                          <a href='#home'>Profile</a>
-                        </li>
-                      </>
-                    ) : (
-                      <li
-                        onClick={() => {
-                          setShow(!show);
-                          props.history.push('/#home');
-                        }}
-                      >
-                        <a href='#home'>Home</a>
-                      </li>
-                    )}
+                    <li
+                      onClick={() => {
+                        setShow(!show);
+                        props.history.push('/posts');
+                      }}
+                    >
+                      <a href='#'>Posts</a>
+                    </li>
+                    <li
+                      onClick={() => {
+                        setShow(!show);
+                        props.history.push('/profile');
+                      }}
+                    >
+                      <a href='#home'>Profile</a>
+                    </li>
+                    <li
+                      onClick={() => {
+                        setShow(!show);
+                      }}
+                    >
+                      <a href='#events'>Events</a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li
+                      onClick={() => {
+                        setShow(!show);
+                        props.history.push('/');
+                      }}
+                    >
+                      <a href='#home'>Home</a>
+                    </li>
                     <li
                       onClick={() => {
                         setShow(!show);
@@ -78,6 +84,8 @@ const Nav = (props) => {
                     </li>
                   </>
                 )}
+              </>
+
               {props.loggedIn ? (
                 <li className={styles.UserInfo}>
                   <Dropdown>
@@ -108,8 +116,7 @@ const Nav = (props) => {
                           localStorage.removeItem('loggedIn');
                           props.clearState();
                           props.logout();
-                          props.history.push('/#contacts');
-
+                          props.history.push('/#home');
                           setShow(!show);
                         }}
                       >
@@ -119,9 +126,19 @@ const Nav = (props) => {
                   </Dropdown>
                 </li>
               ) : (
-                <li onClick={() => setShow(!show)}>
-                  <Link to='/login'>Login</Link>
-                </li>
+                <>
+                  <li
+                    onClick={() => {
+                      setShow(!show);
+                      props.history.push('/#contacts');
+                    }}
+                  >
+                    <a href='#contacts'>Contacts</a>
+                  </li>
+                  <li onClick={() => setShow(!show)}>
+                    <Link to='/register'>Register</Link>
+                  </li>
+                </>
               )}
             </ol>
           </div>
