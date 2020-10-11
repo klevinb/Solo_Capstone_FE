@@ -19,9 +19,9 @@ function Login(props) {
       method: 'POST',
       body: JSON.stringify({ credentials, password }),
       credentials: 'include',
-      headers: new Headers({
+      headers: {
         'Content-Type': 'application/json',
-      }),
+      },
     });
     if (resp.ok) {
       localStorage.setItem('loggedIn', true);
