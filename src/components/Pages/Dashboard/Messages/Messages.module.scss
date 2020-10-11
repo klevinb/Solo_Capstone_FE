@@ -1,5 +1,6 @@
 .Container {
   height: 500px;
+  padding: 0 100px;
   .ActiveUsers {
     display: flex;
     align-items: center;
@@ -135,6 +136,7 @@
 
 @media (max-width: 575px) {
   .Container {
+    padding: 0;
     .ActiveUsers {
       .User {
         p {
@@ -164,6 +166,7 @@
 
 @media (min-width: 1000px) {
   .Container {
+    padding: 0 50px;
     .ChatBox {
       width: 450px !important;
     }

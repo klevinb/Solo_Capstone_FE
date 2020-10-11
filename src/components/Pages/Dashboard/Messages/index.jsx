@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styles from './Messages.module.scss';
 import { Image, Badge, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import { FcInfo } from 'react-icons/fc';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
@@ -27,8 +28,15 @@ const Messages = (props) => {
 
   return (
     <div className={styles.Container}>
+      {props.user && props.user.following.length === 0 && (
+        <Alert severity='info'>
+          <AlertTitle>No Messages</AlertTitle>
+          You can <strong>follow</strong> users and than you can talk with them!
+        </Alert>
+      )}
       <div className={styles.ActiveUsers}>
         {props.user &&
+          props.user.following.length > 0 &&
           props.user.following.map((user, key) => (
             <div
               key={key}
