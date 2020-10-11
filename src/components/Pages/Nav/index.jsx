@@ -23,7 +23,7 @@ const Nav = (props) => {
     <>
       <div className={styles.Container}>
         <div className={styles.Nav}>
-          <Link to='/'>
+          <Link to={props.user ? '/profile' : '/'}>
             <Image src='/assets/yolo.png' />
           </Link>
 

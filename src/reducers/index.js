@@ -53,30 +53,6 @@ export default function (state = [], action) {
         ...state,
         users: action.payload,
       };
-    case 'INC_MSG_COUNT':
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          following: state.user.following.find(
-            (user) => user.username === action.payload.username
-          )
-            ? [
-                ...state.user.following.filter(
-                  (user) => user.username !== action.payload.username
-                ),
-                {
-                  ...state.user.following.find(
-                    (user) => user.username === action.payload.username
-                  ),
-                  messages: state.user.following.find(
-                    (user) => user.username === action.payload.username
-                  ).messages,
-                },
-              ]
-            : [...state.user.following],
-        },
-      };
     case 'CLEAR_STATE':
       return {
         loggedIn: false,

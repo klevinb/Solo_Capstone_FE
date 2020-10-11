@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Posts.module.scss';
 import { Row, Col, Card, Image, Dropdown } from 'react-bootstrap';
 import { refreshTokens } from '../../../Utilities';
@@ -24,16 +24,19 @@ const Posts = (props) => {
   const [image, setImage] = useState(null);
 
   const followUser = async (user) => {
-    const resp = await fetch(url + '/api/users/follow/' + user.username, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const resp = await fetch(
+      url + '/api/users/' + props.user.username + '/follow/' + user.username,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     if (resp.ok) {
       const answer = await resp.json();
-      props.follow({ _id: user._id, name: user.name, surname: user.surname });
+      props.follow(user);
     } else if (resp.status === 401) {
       props.refreshTokens(props.history);
     }

@@ -43,9 +43,9 @@ const mapDispatchToProps = (dispatch, props) => ({
       type: 'SET_ALL_USERS',
       payload: users,
     }),
-  incMsgCount: (user) =>
+  follow: (user) =>
     dispatch({
-      type: 'INC_MSG_COUNT',
+      type: 'FOLLOW_USER',
       payload: user,
     }),
   refreshTokens: (history) => dispatch(refreshTokens(history)),
@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
           (user) => user.username === user.username
         );
         if (!iFollow) {
-          this.props.addUnknownUser({ ...user, ifollow: false });
+          this.props.addUnknownUser({ ...user });
         }
       });
     }
@@ -97,6 +97,28 @@ class Dashboard extends React.Component {
     if (users.ok) {
       const data = await users.json();
       this.props.setAllUsers(data);
+    }
+  };
+
+  followUser = async (user) => {
+    const resp = await fetch(
+      url +
+        '/api/users/' +
+        this.props.user.username +
+        '/follow/' +
+        user.username,
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (resp.ok) {
+      this.props.follow(user);
+    } else if (resp.status === 401) {
+      this.props.refreshTokens(this.props.history);
     }
   };
 
@@ -135,6 +157,7 @@ class Dashboard extends React.Component {
     });
     this.socket.on('clearMsgCount', () => {
       this.fetchAllUsers();
+      this.fetchUser();
     });
     this.socket.on('message', (msg) => {
       const findUser = this.props.user.following.find(
@@ -143,7 +166,7 @@ class Dashboard extends React.Component {
       if (findUser) {
         this.fetchMessages();
         this.fetchAllUsers();
-        // this.fetchUser();
+        this.fetchUser();
       } else {
         const user = this.props.users.find(
           (user) => user.username === msg.from
@@ -199,7 +222,7 @@ class Dashboard extends React.Component {
       <>
         {this.props.user && (
           <>
-            <div className={styles.Dashboard}>
+            <div className={styles.Dashboard} id='home'>
               <Row className={styles.Row}>
                 <Col sm={12} lg={6}>
                   <Row className={styles.Details}>
@@ -264,12 +287,16 @@ class Dashboard extends React.Component {
                     />
                   )}
                   {this.state.selected === 'Events' && (
-                    <UserEvents events={this.props.user.events} />
+                    <UserEvents
+                      events={this.props.user.events}
+                      followUser={this.followUser}
+                    />
                   )}
                   {this.state.selected === 'Messages' && (
                     <Messages
                       sendMsg={this.sendMsg}
                       clearMsgCount={this.clearMsgCount}
+                      followUser={this.followUser}
                     />
                   )}
                 </Col>

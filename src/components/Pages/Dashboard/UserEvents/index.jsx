@@ -66,7 +66,7 @@ const UserEvents = (props) => {
                             {user._id !== props.user._id && (
                               <button
                                 onClick={() => {
-                                  // followUser(post.user)
+                                  props.followUser(user);
                                 }}
                               >
                                 {props.user &&

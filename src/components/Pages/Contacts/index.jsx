@@ -46,7 +46,7 @@ const Contacts = (props) => {
     <>
       <div className={styles.Contacts}>
         <Row className={styles.Row}>
-          <Col sm={12}>
+          <Col sm={12} className={styles.Col}>
             <h3>Can we help you with something?</h3>
           </Col>
           <Col sm={6} md={6} className={styles.IconCol}>

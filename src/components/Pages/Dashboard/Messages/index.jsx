@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import styles from './Messages.module.scss';
 import { Image, Badge, Popover, OverlayTrigger } from 'react-bootstrap';
 import { FcInfo } from 'react-icons/fc';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { BiSend } from 'react-icons/bi';
 
 const mapStateToProps = (state) => state;
 
@@ -15,8 +17,10 @@ const Messages = (props) => {
       <Popover.Title as='h3'>Important Info</Popover.Title>
       <Popover.Content>
         You are not following {selected && selected.name}, if you want to keep
-        the conversation on your profile and talk to them later just click the{' '}
-        <button>Follow</button>
+        the conversation on your profile and talk to them later just click the
+        {'  '}
+        <button onClick={() => props.followUser(selected)}>Follow</button>{' '}
+        button.
       </Popover.Content>
     </Popover>
   );
@@ -24,58 +28,62 @@ const Messages = (props) => {
   return (
     <div className={styles.Container}>
       <div className={styles.ActiveUsers}>
-        {props.user.following.map((user, key) => (
-          <div
-            key={key}
-            className={styles.User}
-            onClick={() => {
-              if (selected === user) {
-                setSelected(null);
-              } else {
-                setSelected(user);
-              }
-            }}
-          >
-            <Image
-              src={
-                user.image ? user.image : 'https://via.placeholder.com/300x200'
-              }
-            />
-            <p>
-              {user.name} {user.surname}
-            </p>
-            {user.messages.find(
-              (message) => message.username === props.user.username
-            ) &&
-              user.messages.find(
+        {props.user &&
+          props.user.following.map((user, key) => (
+            <div
+              key={key}
+              className={styles.User}
+              onClick={() => {
+                if (selected === user) {
+                  setSelected(null);
+                } else {
+                  setSelected(user);
+                }
+              }}
+            >
+              <Image
+                src={
+                  user.image
+                    ? user.image
+                    : 'https://via.placeholder.com/300x200'
+                }
+              />
+              <p>
+                {user.name} {user.surname}
+              </p>
+              {user.messages.find(
                 (message) => message.username === props.user.username
-              ).count > 0 && (
-                <Badge variant='light' className={styles.Notification}>
-                  {
-                    user.messages.find(
-                      (message) => message.username === props.user.username
-                    ).count
-                  }
-                </Badge>
-              )}
-          </div>
-        ))}
+              ) &&
+                user.messages.find(
+                  (message) => message.username === props.user.username
+                ).count > 0 && (
+                  <Badge variant='light' className={styles.Notification}>
+                    {
+                      user.messages.find(
+                        (message) => message.username === props.user.username
+                      ).count
+                    }
+                  </Badge>
+                )}
+            </div>
+          ))}
       </div>
       {selected && (
         <div className={styles.ChatBox}>
-          {selected.ifollow === false && (
-            <div className={styles.BluredChat}>
-              <OverlayTrigger
-                trigger='click'
-                placement='left'
-                overlay={popover}
-              >
-                <FcInfo />
-              </OverlayTrigger>
-            </div>
-          )}
           <div className={styles.ChatHead}>
             <span>{selected.name}</span>
+            <div className={styles.InfoIcon}>
+              <AiFillCloseCircle onClick={() => setSelected(null)} />
+              {/* {selected.ifollow === false && (
+                <OverlayTrigger
+                  trigger='click'
+                  placement='left'
+                  overlay={popover}
+                >
+                  <FcInfo />
+                </OverlayTrigger>
+              )} */}
+            </div>
           </div>
           <div className={styles.Messages}>
             <ul id='messages' style={{ listStyle: 'none' }}>
@@ -83,13 +91,23 @@ const Messages = (props) => {
                 <>
                   {props.user.username === msg.from &&
                   msg.to === selected.username ? (
-                    <li key={key} className='text-right'>
-                      {msg.text}
+                    <li key={key} className={styles.MyMsg}>
+                      <div className={styles.MsgTitle}>
+                        <Image src={selected.image} />
+                        <span>{selected.name}</span>
+                      </div>
+                      <span>{msg.text}</span>
                     </li>
                   ) : (
                     props.user.username === msg.to &&
                     msg.from === selected.username && (
-                      <li key={key}>{msg.text}</li>
+                      <li key={key} className={styles.OtherMsg}>
+                        <div className={styles.MsgTitle}>
+                          <Image src={props.user.image} />
+                          <span>{props.user.name}</span>
+                        </div>
+                        <span>{msg.text} </span>
+                      </li>
                     )
                   )}
                 </>
@@ -112,7 +130,7 @@ const Messages = (props) => {
                 setText('');
               }}
             >
-              Send
+              <BiSend />
             </button>
           </div>
         </div>

@@ -10,3 +10,38 @@
     }
   }
 }
+
+@media (max-width: 575px) {
+  .Container {
+    height: 100%;
+    .Row {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .Participants {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1000px) {
+  .Container {
+    height: 500px;
+    .Row {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .Participants {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+}
+
+@media (min-width: 1300px) {
+}
