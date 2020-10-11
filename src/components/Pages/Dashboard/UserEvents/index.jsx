@@ -15,9 +15,9 @@ const UserEvents = (props) => {
     <div className={styles.Container}>
       {props.user.events.length > 0 ? (
         <>
-          {props.events.map((event) => (
+          <h3>My events</h3>
+          {props.user.events.map((event) => (
             <>
-              <h3>My events</h3>
               <Row className={styles.Row}>
                 <Col sm={3}>
                   <Image fluid src={event.image ? event.image : ''} />
