@@ -287,10 +287,7 @@ class Dashboard extends React.Component {
                     />
                   )}
                   {this.state.selected === 'Events' && (
-                    <UserEvents
-                      events={this.props.user.events}
-                      followUser={this.followUser}
-                    />
+                    <UserEvents followUser={this.followUser} />
                   )}
                   {this.state.selected === 'Messages' && (
                     <Messages
