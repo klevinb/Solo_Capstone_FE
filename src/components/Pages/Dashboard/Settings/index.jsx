@@ -159,7 +159,7 @@ export default (props) => {
               <Form.Label>Birthday</Form.Label>
               <Form.Control
                 type='date'
-                value={birthday.slice(0, 10)}
+                value={birthday && birthday.slice(0, 10)}
                 onChange={(e) => setBirthday(e.target.value)}
               />
             </Form.Group>

@@ -51,7 +51,9 @@ function Login(props) {
           <div className={styles.Options}>
             <h3>Login or</h3>
             <button>
-              Continue with <FaFacebook />
+              <a href={url + '/api/users/auth/facebook'}>
+                Continue with <FaFacebook />
+              </a>
             </button>
           </div>
           {error && <Alert variant='danger'>{errorMessage}</Alert>}

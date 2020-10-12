@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
       const data = await unReadMessages.json();
       data.forEach((user) => {
         const iFollow = this.props.user.following.find(
-          (user) => user.username === user.username
+          (usr) => usr.username === user.username
         );
         if (!iFollow) {
           this.props.addUnknownUser({ ...user });
@@ -135,6 +135,7 @@ class Dashboard extends React.Component {
       this.fetchMessages();
       this.fetchUnreadMessages();
       this.fetchAllUsers();
+      console.log(this.props.user.events);
     }
     if (resp.status === 401) {
       this.props.refreshTokens(this.props.history);
@@ -145,11 +146,11 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    if (!localStorage.getItem('loggedIn')) {
-      this.props.history.push('/login');
-    } else {
-      this.fetchUser();
-    }
+    // if (!localStorage.getItem('loggedIn')) {
+    //   this.props.history.push('/login');
+    // } else {
+    this.fetchUser();
+    // }
 
     const connectionOpt = {
       transports: ['websocket'],
