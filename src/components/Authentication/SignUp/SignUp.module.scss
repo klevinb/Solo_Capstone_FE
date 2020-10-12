@@ -10,17 +10,20 @@
 
 .SignUp {
   z-index: 2;
-  background-color: white;
+  background-color: transparent;
+  font-size: bold;
+  color: whitesmoke;
   padding: 50px;
   border-radius: 25px;
   width: 60%;
   form {
     display: grid;
+    font-weight: 400;
   }
   button {
     justify-self: end;
     background-color: transparent;
-    color: gray;
+    color: whitesmoke;
     border: 1px solid gray;
   }
   button:hover,

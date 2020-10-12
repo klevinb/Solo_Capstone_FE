@@ -3,6 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './SignIn.module.scss';
 import { connect } from 'react-redux';
+import { FaFacebook } from 'react-icons/fa';
 
 const mapStateToProps = (state) => state;
 
@@ -47,7 +48,12 @@ function Login(props) {
       <div className={styles.Container}>
         <div className={styles.BG}></div>
         <div className={styles.Login}>
-          <h3>Login</h3>
+          <div className={styles.Options}>
+            <h3>Login or</h3>
+            <button>
+              Continue with <FaFacebook />
+            </button>
+          </div>
           {error && <Alert variant='danger'>{errorMessage}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='credentials'>

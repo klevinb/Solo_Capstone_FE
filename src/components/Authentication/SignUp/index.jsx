@@ -9,7 +9,7 @@ export default function SignUp(props) {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [age, setAge] = useState(18);
-  const [birthday, setBirthday] = useState(null);
+  const [birthday, setBirthday] = useState(undefined);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
