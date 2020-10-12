@@ -139,6 +139,9 @@ class Dashboard extends React.Component {
     if (resp.status === 401) {
       this.props.refreshTokens(this.props.history);
     }
+    if (resp.status === 400) {
+      this.props.history.push('/login');
+    }
   };
 
   componentDidMount() {

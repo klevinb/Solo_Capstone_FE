@@ -19,10 +19,10 @@ const UserEvents = (props) => {
           {props.user.events.map((event) => (
             <>
               <Row className={styles.Row}>
-                <Col sm={3}>
+                <Col sm={4}>
                   <Image fluid src={event.image ? event.image : ''} />
                 </Col>
-                <Col sm={9}>
+                <Col sm={8}>
                   <h4>{event.name}</h4>
                   <p>{event.description}</p>
 
@@ -44,62 +44,69 @@ const UserEvents = (props) => {
                         }
                       })}
                   </AvatarGroup>
+                  <Modal
+                    show={showModal}
+                    onHide={() => setShowModal(false)}
+                    centered
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Participants</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className={styles.ModalCardBody}>
+                      {showModal &&
+                        event.participants
+                          .filter((user) => user !== props.user._id)
+                          .map((id, key) => {
+                            const user = props.users.find(
+                              (user) => user._id === id
+                            );
+                            if (user) {
+                              return (
+                                <Row className={styles.Participants} key={key}>
+                                  <Col>
+                                    <Avatar
+                                      onClick={() => setShowModal(true)}
+                                      alt={user.name}
+                                      src={user.image}
+                                    />
+                                  </Col>
+                                  <Col>
+                                    <p>
+                                      {user.name} {user.surname}
+                                    </p>
+                                  </Col>
+                                  <Col>
+                                    {user._id !== props.user._id && (
+                                      <button
+                                        onClick={() => {
+                                          props.followUser(user);
+                                        }}
+                                      >
+                                        {props.user &&
+                                        props.user.following.find(
+                                          (usr) => usr._id === user._id
+                                        ) ? (
+                                          <>
+                                            <span>UnFollow</span>
+                                            <RiUserUnfollowLine />
+                                          </>
+                                        ) : (
+                                          <>
+                                            <span>Follow</span>
+                                            <RiUserFollowLine />
+                                          </>
+                                        )}
+                                      </button>
+                                    )}
+                                  </Col>
+                                </Row>
+                              );
+                            }
+                          })}
+                    </Modal.Body>
+                  </Modal>
                 </Col>
               </Row>
-              <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Participants</Modal.Title>
-                </Modal.Header>
-                <div className={styles.ModalCardBody}>
-                  {event.participants
-                    .filter((user) => user !== props.user._id)
-                    .map((id, key) => {
-                      const user = props.users.find((user) => user._id === id);
-                      if (user) {
-                        return (
-                          <Row className={styles.Participants} key={key}>
-                            <Col>
-                              <Avatar
-                                onClick={() => setShowModal(true)}
-                                alt={user.name}
-                                src={user.image}
-                              />
-                            </Col>
-                            <Col>
-                              <p>
-                                {user.name} {user.surname}
-                              </p>
-                            </Col>
-                            <Col>
-                              {user._id !== props.user._id && (
-                                <button
-                                  onClick={() => {
-                                    props.followUser(user);
-                                  }}
-                                >
-                                  {props.user &&
-                                  props.user.following.find(
-                                    (usr) => usr._id === user._id
-                                  ) ? (
-                                    <>
-                                      <span>UnFollow</span>
-                                      <RiUserUnfollowLine />
-                                    </>
-                                  ) : (
-                                    <>
-                                      <span>Follow</span>
-                                      <RiUserFollowLine />
-                                    </>
-                                  )}
-                                </button>
-                              )}
-                            </Col>
-                          </Row>
-                        );
-                      }
-                    })}
-                </div>
-              </Modal>
             </>
           ))}
         </>

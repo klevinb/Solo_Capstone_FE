@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, Row, Col } from 'react-bootstrap';
 import styles from './Events.module.scss';
 import Pulse from 'react-reveal/Pulse';
+import { FaCcPaypal } from 'react-icons/fa';
 
 const mapStateToProps = (state) => state;
 const url = process.env.REACT_APP_BE_ENDPOINT;
@@ -83,9 +84,10 @@ const Events = (props) => {
                       {event.startDate.slice(0, 10)} 21:30
                     </Card.Text>
 
-                    <button
-                      onClick={() => buyEvent(event._id)}
-                    >{`Buy Ticket $${event.price}`}</button>
+                    <button onClick={() => buyEvent(event._id)}>
+                      <FaCcPaypal />
+                      {`$${event.price}`}
+                    </button>
                   </Card.Body>
                 </Card>
               </Pulse>
