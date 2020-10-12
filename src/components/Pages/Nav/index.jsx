@@ -77,10 +77,10 @@ const Nav = (props) => {
                     <li
                       onClick={() => {
                         setShow(!show);
-                        props.history.push('/#events');
+                        props.history.push('/#about');
                       }}
                     >
-                      <a href='#events'>Events</a>
+                      <a href='#about'>About</a>
                     </li>
                   </>
                 )}
