@@ -23,7 +23,7 @@ const Events = (props) => {
       });
       const redirectUrl = await resp.json();
       if (resp.ok) {
-        window.open(redirectUrl, '_blank');
+        window.location.replace(redirectUrl);
       }
     } else {
       alert('Please login to buy an Event');
