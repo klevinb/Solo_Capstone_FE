@@ -149,7 +149,7 @@ const Posts = (props) => {
               <Card key={key} className={styles.Card}>
                 <Card.Body className={styles.CardBody}>
                   <div className={styles.PostInfo}>
-                    <Image src={post.user.image} />
+                    <Image src={post.user.image ? post.user.image : ''} />
                     <Card.Title className={styles.CardTitle}>
                       <p>
                         {post.user.name} {post.user.surname}
