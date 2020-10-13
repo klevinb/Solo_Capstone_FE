@@ -20,7 +20,14 @@ const UserEvents = (props) => {
             <>
               <Row className={styles.Row}>
                 <Col sm={4}>
-                  <Image fluid src={event.image ? event.image : ''} />
+                  <Image
+                    fluid
+                    src={
+                      event.image
+                        ? event.image
+                        : 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
+                    }
+                  />
                 </Col>
                 <Col sm={8}>
                   <h4>{event.name}</h4>
@@ -38,7 +45,11 @@ const UserEvents = (props) => {
                             <Avatar
                               onClick={() => setShowModal(true)}
                               alt={user.name}
-                              src={user.image}
+                              src={
+                                user.image
+                                  ? user.image
+                                  : 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
+                              }
                             />
                           );
                         }
@@ -67,7 +78,11 @@ const UserEvents = (props) => {
                                     <Avatar
                                       onClick={() => setShowModal(true)}
                                       alt={user.name}
-                                      src={user.image}
+                                      src={
+                                        user.image
+                                          ? user.image
+                                          : 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
+                                      }
                                     />
                                   </Col>
                                   <Col>

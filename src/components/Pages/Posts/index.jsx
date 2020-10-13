@@ -145,58 +145,69 @@ const Posts = (props) => {
           </div>
 
           <div className={styles.PostsBlocks}>
-            {posts.map((post, key) => (
-              <Card key={key} className={styles.Card}>
-                <Card.Body className={styles.CardBody}>
-                  <div className={styles.PostInfo}>
-                    <Image src={post.user.image ? post.user.image : ''} />
-                    <Card.Title className={styles.CardTitle}>
-                      <p>
-                        {post.user.name} {post.user.surname}
-                      </p>
+            {posts.length > 0 &&
+              posts.map((post, key) => (
+                <Card key={key} className={styles.Card}>
+                  <Card.Body className={styles.CardBody}>
+                    <div className={styles.PostInfo}>
+                      <Image
+                        src={
+                          post.user.image
+                            ? post.user.image
+                            : 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
+                        }
+                      />
+                      <Card.Title className={styles.CardTitle}>
+                        <p>
+                          {post.user.name} {post.user.surname}
+                        </p>
 
-                      {props.user && post.user._id !== props.user._id && (
-                        <button onClick={() => followUser(post.user)}>
-                          {props.user &&
-                          props.user.following.find(
-                            (user) => user._id === post.user._id
-                          ) ? (
-                            <>
-                              <span>UnFollow</span>
-                              <RiUserUnfollowLine />
-                            </>
-                          ) : (
-                            <>
-                              <span>Follow</span>
-                              <RiUserFollowLine />
-                            </>
-                          )}
-                        </button>
+                        {props.user && post.user._id !== props.user._id && (
+                          <button onClick={() => followUser(post.user)}>
+                            {props.user &&
+                            props.user.following.find(
+                              (user) => user._id === post.user._id
+                            ) ? (
+                              <>
+                                <span>UnFollow</span>
+                                <RiUserUnfollowLine />
+                              </>
+                            ) : (
+                              <>
+                                <span>Follow</span>
+                                <RiUserFollowLine />
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </Card.Title>
+                      {props.user && post.user._id === props.user._id && (
+                        <Dropdown className={styles.Dropdown}>
+                          <Dropdown.Toggle
+                            variant='success'
+                            id='dropdown-basic'
+                          ></Dropdown.Toggle>
+
+                          <Dropdown.Menu>
+                            <Dropdown.Item href='#/action-1'>
+                              Edit
+                            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => deletePost(post._id)}>
+                              Delete
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
                       )}
-                    </Card.Title>
-                    {props.user && post.user._id === props.user._id && (
-                      <Dropdown className={styles.Dropdown}>
-                        <Dropdown.Toggle
-                          variant='success'
-                          id='dropdown-basic'
-                        ></Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                          <Dropdown.Item href='#/action-1'>Edit</Dropdown.Item>
-                          <Dropdown.Item onClick={() => deletePost(post._id)}>
-                            Delete
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    )}
+                    </div>
+                    <Card.Text className={styles.PostText}>
+                      {post.text}
+                    </Card.Text>
+                  </Card.Body>
+                  <div className='d-flex justify-content-center'>
+                    <Card.Img variant='top' src={post.image} />
                   </div>
-                  <Card.Text className={styles.PostText}>{post.text}</Card.Text>
-                </Card.Body>
-                <div className='d-flex justify-content-center'>
-                  <Card.Img variant='top' src={post.image} />
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
           </div>
         </Col>
       </Row>
