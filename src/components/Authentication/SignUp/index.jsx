@@ -83,7 +83,7 @@ export default function SignUp(props) {
             </Col>
             <Col sm={6} md={6}>
               <Form.Group controlId='surname'>
-                <Form.Label>Suranme</Form.Label>
+                <Form.Label>Surname</Form.Label>
                 <Form.Control
                   type='text'
                   value={surname}
