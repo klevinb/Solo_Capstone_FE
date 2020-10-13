@@ -235,7 +235,7 @@ class Dashboard extends React.Component {
                         src={
                           this.props.user.image
                             ? this.props.user.image
-                            : 'https://via.placeholder.com/300x200'
+                            : 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
                         }
                         alt='user img'
                       />

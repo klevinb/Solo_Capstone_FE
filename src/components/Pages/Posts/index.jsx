@@ -204,7 +204,7 @@ const Posts = (props) => {
                     </Card.Text>
                   </Card.Body>
                   <div className='d-flex justify-content-center'>
-                    <Card.Img variant='top' src={post.image} />
+                    {post.image && <Card.Img variant='top' src={post.image} />}
                   </div>
                 </Card>
               ))}
