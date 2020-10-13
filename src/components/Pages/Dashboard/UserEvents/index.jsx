@@ -11,6 +11,8 @@ const mapStateToProps = (state) => state;
 
 const UserEvents = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedEvent, setSelctedEvent] = useState('');
+
   return (
     <div className={styles.Container}>
       {props.user.events.length > 0 ? (
@@ -43,7 +45,10 @@ const UserEvents = (props) => {
                         if (user) {
                           return (
                             <Avatar
-                              onClick={() => setShowModal(true)}
+                              onClick={() => {
+                                selectedEvent(event);
+                                setShowModal(true);
+                              }}
                               alt={user.name}
                               src={
                                 user.image
@@ -57,7 +62,10 @@ const UserEvents = (props) => {
                   </AvatarGroup>
                   <Modal
                     show={showModal}
-                    onHide={() => setShowModal(false)}
+                    onHide={() => {
+                      setSelctedEvent('');
+                      setShowModal(false);
+                    }}
                     centered
                   >
                     <Modal.Header closeButton>
@@ -65,7 +73,7 @@ const UserEvents = (props) => {
                     </Modal.Header>
                     <Modal.Body className={styles.ModalCardBody}>
                       {showModal &&
-                        event.participants
+                        selectedEvent.participants
                           .filter((user) => user !== props.user._id)
                           .map((id, key) => {
                             const user = props.users.find(
