@@ -46,7 +46,7 @@ const UserEvents = (props) => {
                           return (
                             <Avatar
                               onClick={() => {
-                                selectedEvent(event);
+                                setSelctedEvent(event);
                                 setShowModal(true);
                               }}
                               alt={user.name}
