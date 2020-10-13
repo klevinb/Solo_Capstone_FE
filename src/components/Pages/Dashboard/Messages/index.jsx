@@ -56,9 +56,7 @@ const Messages = (props) => {
                     : 'https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png'
                 }
               />
-              <p>
-                {user.name} {user.surname}
-              </p>
+              <p>{user.name}</p>
               {user.messages.find(
                 (message) => message.username === props.user.username
               ) &&
