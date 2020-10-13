@@ -101,8 +101,8 @@ const Messages = (props) => {
                   msg.to === selected.username ? (
                     <li key={key} className={styles.MyMsg}>
                       <div className={styles.MsgTitle}>
-                        <Image src={selected.image} />
-                        <span>{selected.name}</span>
+                        <Image src={props.user.image} />
+                        <span>{props.user.name}</span>
                       </div>
                       <span>{msg.text}</span>
                     </li>
@@ -111,8 +111,8 @@ const Messages = (props) => {
                     msg.from === selected.username && (
                       <li key={key} className={styles.OtherMsg}>
                         <div className={styles.MsgTitle}>
-                          <Image src={props.user.image} />
-                          <span>{props.user.name}</span>
+                          <Image src={selected.image} />
+                          <span>{selected.name}</span>
                         </div>
                         <span>{msg.text} </span>
                       </li>
