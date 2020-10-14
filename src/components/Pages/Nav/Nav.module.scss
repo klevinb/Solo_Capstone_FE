@@ -36,6 +36,7 @@
       }
       .DropdownMenu {
         font-size: 20px !important;
+        color: rgb(17, 17, 17) !important;
       }
       .DropdownMenu:hover {
         background: transparent !important;
@@ -80,6 +81,7 @@
     }
   }
 }
+
 @media (max-width: 575px) {
   .Container {
     .Nav {
