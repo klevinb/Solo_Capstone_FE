@@ -5,6 +5,9 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    p {
+      font-family: 'Montserrat', sans-serif;
+    }
     .Participants {
       display: flex;
       flex-direction: column;
@@ -20,6 +23,7 @@
       margin-bottom: 10px;
       display: flex;
       align-items: center;
+
       .Participants {
         display: flex;
         flex-direction: column;

@@ -31,6 +31,7 @@
       button {
         border: 1px solid whitesmoke;
         background: transparent;
+        border-radius: 6px;
         color: whitesmoke;
         margin-left: 10px;
       }
@@ -39,9 +40,13 @@
         min-height: 50px;
         max-height: 100px;
       }
+      label {
+        margin: 0;
+      }
       svg {
         font-size: 35px;
         margin-left: 10px;
+        margin-bottom: 0;
       }
     }
     .Card {
@@ -92,6 +97,8 @@
       }
       .PostText {
         padding: 10px !important;
+
+        font-family: 'Montserrat', sans-serif;
       }
     }
   }

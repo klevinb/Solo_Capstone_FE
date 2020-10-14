@@ -102,6 +102,7 @@ const Nav = (props) => {
                     <Dropdown.Menu>
                       <Dropdown.Item
                         href='#contacts'
+                        className={styles.DropdownMenu}
                         onClick={() => {
                           props.history.push('/#contacts');
                           setShow(!show);
@@ -111,7 +112,7 @@ const Nav = (props) => {
                       </Dropdown.Item>
 
                       <Dropdown.Item
-                        className={styles.Logout}
+                        className={styles.DropdownMenu}
                         onClick={() => {
                           localStorage.removeItem('loggedIn');
                           props.clearState();

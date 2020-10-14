@@ -28,6 +28,12 @@
         justify-content: space-between;
         border-bottom-left-radius: 25px;
         overflow: hidden;
+        h5 {
+          font-weight: bold;
+        }
+        p {
+          font-family: 'Montserrat';
+        }
       }
       .Bold {
         font-weight: 700;
