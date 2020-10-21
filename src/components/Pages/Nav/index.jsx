@@ -58,6 +58,7 @@ const Nav = (props) => {
                     </li>
                     <li
                       onClick={() => {
+                        props.history.push('/profile#events');
                         setShow(!show);
                       }}
                     >
@@ -117,7 +118,7 @@ const Nav = (props) => {
                           localStorage.removeItem('loggedIn');
                           props.clearState();
                           props.logout();
-                          props.history.push('/#home');
+                          props.history.push('/');
                           setShow(!show);
                         }}
                       >
