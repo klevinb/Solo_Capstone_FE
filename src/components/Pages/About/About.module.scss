@@ -24,6 +24,7 @@
       font-size: 2rem !important;
     }
     h5 {
+      font-family: 'Montserrat';
       color: whitesmoke;
       padding: 50px;
       text-align: justify;
@@ -33,6 +34,7 @@
     .InfoCol {
       p {
         color: whitesmoke;
+        font-family: 'Montserrat';
         width: 90%;
         font-size: 20px;
         font-weight: 300;
@@ -86,6 +88,19 @@
   .About {
     height: 100%;
     padding-top: 5vh;
+    .Row {
+      .ImgCol {
+        img {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .About {
+    padding: 0 100px 0 100px;
     .Row {
       .ImgCol {
         img {
