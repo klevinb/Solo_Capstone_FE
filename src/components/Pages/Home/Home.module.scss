@@ -26,6 +26,7 @@
           margin-bottom: 20px;
         }
         .SecondTitle {
+          font-family: 'Montserrat';
           font-size: 25px;
         }
         p {
@@ -109,7 +110,32 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .Container {
+    .Main {
+      .Section {
+        padding: 50px 40px;
+        .Details {
+          .Intro {
+            padding: 20px;
+            .MainTitle {
+              font-size: 55px;
+            }
+            .SecondTitle {
+              width: 100%;
+              font-size: 22px;
+            }
+            .DownloadPhotos {
+              img {
+                width: 200px;
+              }
+            }
+          }
+        }
+        .Perview {
+          width: 100%;
+        }
+      }
+    }
   }
 }
