@@ -19,8 +19,15 @@
   form {
     display: grid;
     font-weight: 400;
+    label {
+      font-family: 'Montserrat';
+    }
+  }
+  span {
+    font-family: 'Montserrat';
   }
   button {
+    font-family: 'Montserrat';
     justify-self: end;
     background-color: transparent;
     color: whitesmoke;

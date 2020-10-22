@@ -19,6 +19,15 @@
   form {
     display: grid;
     font-weight: 400;
+    label {
+      font-family: 'Montserrat';
+    }
+    button {
+      font-family: 'Montserrat';
+    }
+  }
+  span {
+    font-family: 'Montserrat';
   }
   button {
     justify-self: end;
